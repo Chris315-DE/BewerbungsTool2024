@@ -1,0 +1,66 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                
+                    
+                    
+    <Style x:Key="NavButton" TargetType="RadioButton">
+        
+        
+        
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Padding" Value="10 5"/>
+        <Setter Property="Background" Value="{StaticResource BrushBackroundLigth}"/>
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Grid x:Name="gridMain" Background="{TemplateBinding Background}">
+                        <TextBlock x:Name="Test"
+                          Padding="{TemplateBinding Padding}"
+                          Text="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Grid>
+
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Background" Value="{StaticResource ForegroundMainBrush}" TargetName="gridMain"/>
+                            <Setter Property="Foreground" Value="WhiteSmoke" TargetName="Test" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimation To="{StaticResource ForegroundMain}" 
+                                      Duration="0:0:0.5" 
+                                      Storyboard.TargetProperty="Background.Color">
+                        </ColorAnimation>
+                        <ColorAnimation To="WhiteSmoke"  Duration="0:0:0.5" 
+                                      Storyboard.TargetProperty="Foreground.Color">
+
+                        </ColorAnimation>
+
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimation To="{StaticResource BackgroundLight}" 
+                           Duration="0:0:0.5" 
+                           Storyboard.TargetProperty="Background.Color">
+                        </ColorAnimation>
+                        <ColorAnimation To="Black"  Duration="0:0:0.5" 
+                                      Storyboard.TargetProperty="Foreground.Color"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+
+    </Style>
+</ResourceDictionary>

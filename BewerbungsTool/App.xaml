@@ -1,0 +1,38 @@
+﻿<Application x:Class="BewerbungsTool.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:con="clr-namespace:BewerbungsTool.Controlls"
+            xmlns:vm="clr-namespace:BewerbungsTool.ViewModel"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:BewerbungsTool">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries   >
+                <ResourceDictionary Source="/Styles/Common.xaml"/>
+                <ResourceDictionary Source="/Styles/CStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="/Styles/TextblockStyles.xaml"/>
+                <ResourceDictionary Source="/Styles/CKLabel.xaml"/>
+                <ResourceDictionary Source="/Styles/ScrollbarStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/CKComboBox.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type vm:BriefkopfViewModel}">
+                <con:BriefkopfControll/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:AnschreibenViewModel}">
+                <con:AnschreibenControll/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:ÜbersichtsViewModel}">
+                <con:ÜbersichtControll/>
+            </DataTemplate>
+
+
+        </ResourceDictionary>
+
+
+
+
+    </Application.Resources>
+</Application>
