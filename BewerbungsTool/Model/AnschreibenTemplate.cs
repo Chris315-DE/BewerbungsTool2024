@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BewerbungsTool.Model
 {
-    public class AnschreibenTemplate : IAnschreibenTemplate<AnschreibenTemplate>
+    public class AnschreibenTemplate : BaseViewModel, IAnschreibenTemplate<AnschreibenTemplate>
     {
 
         public AnschreibenTemplate(string Id)
@@ -17,13 +17,56 @@ namespace BewerbungsTool.Model
             TemplateID = Id;
 
         }
+        private string _StartDatumSatz;
 
 
+
+
+        public string StartDatumSatz
+        {
+            get => _StartDatumSatz;
+             set
+            {
+                if (value != _StartDatumSatz)
+                {
+                    _StartDatumSatz = value;
+                    RaisPropertyChanged();
+                }
+
+            }
+        }
         public string TemplateID { get; set; }
         public string Einleitung { get; set; }
         public string Hauptteil { get; set; }
         public string Abschluss { get; set; }
-        public DateTime StartDatum { get; set; }
+
+        public string Headder { get; set; }
+        public DateTime StartDatum
+        {
+            get => _StartDatum;
+            set
+            {
+                if (value != _StartDatum)
+                {
+                    _StartDatum = value;
+                    RaisPropertyChanged();
+
+                    if (StartDatum.ToShortDateString() == DateTime.Today.ToShortDateString())
+                    {
+                        StartDatumSatz = "Da ich monentan nicht vertraglich gebunden bin, ist ein kurzfristiger Eintritt möglich.";
+                    }
+                    else
+                    {
+                        StartDatumSatz = $"Die Arbeitsaufnahme bei ihnen  ist für mich ab dem {StartDatum.ToShortDateString()} möglich.";
+
+                    }
+
+                    RaisPropertyChanged(nameof(StartDatumSatz));
+
+                }
+            }
+        }
+        private DateTime _StartDatum;
 
         public bool Equals(AnschreibenTemplate? other)
         {

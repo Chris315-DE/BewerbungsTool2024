@@ -116,7 +116,7 @@
 
                 <RadioButton Style="{StaticResource NavButton}" Content="Frau" Command="{Binding SelectAnredeCommand}" CommandParameter="{x:Static enum:AnredeEnums.Frau}"/>
                 <RadioButton  Style="{StaticResource NavButton}" Grid.Column="1" Command="{Binding SelectAnredeCommand}" CommandParameter="{x:Static enum:AnredeEnums.Herr}" Content="Herr"/>
-                <RadioButton  Style="{StaticResource NavButton}" Grid.Column="2" Command="{Binding SelectAnredeCommand}" CommandParameter="{x:Static enum:AnredeEnums.Damen_Und_Herren}"  Content="Damen und Herren"/>
+                <RadioButton  Width="300" FontSize="15" Style="{StaticResource NavButton}" Grid.Column="2" Command="{Binding SelectAnredeCommand}" CommandParameter="{x:Static enum:AnredeEnums.Damen_Und_Herren}"  Content="Damen und Herren"/>
 
             </Grid>
         </StackPanel>

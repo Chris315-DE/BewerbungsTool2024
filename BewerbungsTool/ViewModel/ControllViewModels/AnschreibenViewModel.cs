@@ -1,4 +1,5 @@
 ﻿using BewerbungsTool.Contracts;
+using BewerbungsTool.Manager;
 using BewerbungsTool.Model;
 using BewerbungsTool.MvvmBasics;
 using System;
@@ -17,10 +18,22 @@ namespace BewerbungsTool.ViewModel
         {
             BewerbungsTemplate = [];
             TemplateisSelected = false;
+           
+
+
+#if DEBUG
+
+            DebugTemplates();
+
+#endif
+
             AddTemplateCommand = new DelegateCommand(o => !string.IsNullOrEmpty(NeuesTemplate), o =>
             {
 
-                var TemplatetoADD = new AnschreibenTemplate(NeuesTemplate);
+                var TemplatetoADD = new AnschreibenTemplate(NeuesTemplate)
+                {
+                    StartDatum = DateTime.Now,
+                };
 
                 SetnewTemplate(TemplatetoADD, 0);
                 NeuesTemplate = string.Empty;
@@ -29,6 +42,25 @@ namespace BewerbungsTool.ViewModel
             });
 
 
+            SaveTemplateCommand = new DelegateCommand(o => TemplateisSelected, o => 
+            {
+                SaveTemplate(SelectedTemplate);
+            });
+
+
+
+        }
+
+        private void DebugTemplates()
+        {
+            BewerbungsTemplate.Add(new AnschreibenTemplate("DEBUG")
+            {
+                Einleitung = "Hallo ich bin GOD GAMER \nUnd werde euch alle Versklaven HAHA ich bin GodGamer",
+                Headder = "Bewerbung als GodGamer",
+                Hauptteil = "Ich bin euer MEISTER MUHAHAH",
+                Abschluss = "ALso Kniet Nieder",
+                StartDatum = DateTime.Now.AddDays(30)
+            });
 
 
         }
@@ -44,9 +76,12 @@ namespace BewerbungsTool.ViewModel
                 {
                     _TemplateisSelected = value;
                     RaisPropertyChanged();
+                    SaveTemplateCommand.RaiseCanExecuteChanged();
                 }
             }
         }
+
+
 
 
         private void SetnewTemplate(AnschreibenTemplate templatetoADD, int retry)
@@ -82,7 +117,7 @@ namespace BewerbungsTool.ViewModel
                 if (value != _SelectedTemplate)
                 {
                     _SelectedTemplate = value;
-                    if(_SelectedTemplate != null)
+                    if (_SelectedTemplate != null)
                     {
                         TemplateisSelected = true;
                     }
@@ -117,6 +152,11 @@ namespace BewerbungsTool.ViewModel
         }
 
 
+
+        public DateTime ToDay { get; set; } = DateTime.Now;
+        public DateTime EndDay { get; set; } = DateTime.Now.AddDays(365);
+
+
         public DelegateCommand AddTemplateCommand { get; set; }
 
         private string _neuesTemplate;
@@ -134,6 +174,20 @@ namespace BewerbungsTool.ViewModel
                 }
             }
         }
+
+
+        public DelegateCommand SaveTemplateCommand {  get; set; }
+
+        private void SaveTemplate(AnschreibenTemplate template)
+        {
+
+            SaveManager<AnschreibenTemplate> safe = new(template);
+
+            safe.Save(template.TemplateID);
+
+
+        }
+
 
 
     }

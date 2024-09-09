@@ -11,7 +11,7 @@
         AllowsTransparency="True"
         AllowDrop="True"
         ResizeMode="CanResize"
-        Title="Bewerbungstool" Height="450" Width="800">
+        Title="Bewerbungstool" Height="600" Width="1000">
                             <!--#region STYLE-->
 <!--// STYLE //-->
     <Window.Resources>

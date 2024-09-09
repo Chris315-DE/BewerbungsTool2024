@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BewerbungsTool.Controlls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="550" d:DesignWidth="950">
 
     <UserControl.Resources>
         <Style TargetType="{x:Type Label}">
@@ -22,10 +22,12 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="75"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -37,7 +39,7 @@
         
         <!--#region TEMPLATE Grid ROW 0-->
         <!--// TEMPLATE //-->
-        <Label VerticalAlignment="Center"  Content="Bewerbung als:" HorizontalAlignment="Left"/>
+        <Label VerticalAlignment="Center"  Content="Template:" HorizontalAlignment="Left"/>
 
         <ComboBox Style="{StaticResource ComboBoxFlatStyle}" SelectedValue="{Binding SelectedTemplate}" Margin="5" Width="200" ItemsSource="{Binding BewerbungsTemplate}" Grid.Row="0" Grid.Column="1"/>
 
@@ -48,16 +50,79 @@
             </Grid.ColumnDefinitions>
 
 
-            <TextBox Style="{StaticResource TextBoxPlaxeholder}" Text="{Binding NeuesTemplate}" Tag="Eigenes Template" Background="{StaticResource BrushBackroundLigth}"/>
+            <TextBox Style="{StaticResource TextBoxPlaxeholder}" Text="{Binding NeuesTemplate}" Tag="Neues Template" Background="{StaticResource BrushBackroundLigth}"/>
             <Button Grid.Column="1" Style="{StaticResource CkButton}" Content="Hinzufügen" Margin="5" Command="{Binding AddTemplateCommand}" Background="{StaticResource ForegroundMainBrush}"/>
         </Grid>
 
     <!--#endregion-->
+        
+        <!--#region Bewerbung als : GRID ROW 1-->
 
-        <!--#region EINLEITUNG GRID ROW 1 -->
+        <Label Grid.Row="1" Grid.Column="0" Content="Bewerbung als:"/>
+        <TextBox Grid.Row="1" Background="LightGray" Grid.Column="1" IsEnabled="{Binding TemplateisSelected}" Text="{Binding SelectedTemplate.Headder}" Grid.ColumnSpan="2" Style="{StaticResource TextBoxPlaxeholder}" Tag="Bewerbung als IMPERATOR des Universums" />
+        <!--#endregion-->
+        
+        <!--#region EINLEITUNG GRID ROW 2 -->
 
-        <Label Grid.Row="1" Content="Einleitung:" />
-        <TextBox Style="{StaticResource TextBoxPlaxeholder}" IsEnabled="{Binding TemplateisSelected}" Text="{Binding SelectedTemplate.Einleitung}" Tag="Hier kommt der EinleitungsText rein" Background="{StaticResource BrushBackroundLigth}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <Label Grid.Row="2" Content="Einleitung:" />
+        
+        <ScrollViewer Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
+            <TextBox Style="{StaticResource TextBoxPlaxeholder}" AcceptsReturn="True" IsEnabled="{Binding TemplateisSelected}" Text="{Binding SelectedTemplate.Einleitung}" Tag="Hier kommt der EinleitungsText rein" Background="{StaticResource BrushBackroundLigth}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
+        </ScrollViewer>
+            
+
+        <!--#endregion-->
+
+        <!--#region HAUPTTEIL GRID ROW 3-->
+
+        <Label Content="Hauptteil:" Grid.Row="3" Grid.Column="0"/>
+
+        <ScrollViewer Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
+            <TextBox Style="{StaticResource TextBoxPlaxeholder}" Tag="Hier Kommt der Hauptteil rein " AcceptsReturn="True" Background="LightGray" Text="{Binding SelectedTemplate.Hauptteil}" />
+        </ScrollViewer>
+        
+        <!--#endregion-->
+
+
+        <!--#region ABSCHLUS GRID ROW 4-->
+
+        <Label Content="Abschluss:" Grid.Row="4" Grid.Column="0"/>
+
+        <ScrollViewer Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2">
+            <TextBox Style="{StaticResource TextBoxPlaxeholder}" Tag="Hier Kommt der Abschluss rein " AcceptsReturn="True" Background="{StaticResource BrushBackroundLigth}" Text="{Binding SelectedTemplate.Abschluss}" />
+        </ScrollViewer>
+
+        <!--#endregion-->
+        
+        <!--#region StartDatum GRID ROW 5-->
+        <Label Content="StartDatum:" Grid.Row="5" Grid.Column="0" />
+        <DatePicker IsEnabled="{Binding TemplateisSelected}" SelectedDate="{Binding SelectedTemplate.StartDatum}" Grid.Row="5" Grid.Column="1" DisplayDateStart="{Binding ToDay}"/>
+
+        <TextBox Grid.Row="5" Grid.Column="2" Text="{Binding SelectedTemplate.StartDatumSatz}" IsEnabled="{Binding TemplateisSelected}" Tag="Wann kann ich anfangen?" Background="LightGray"></TextBox>
+        <!--#endregion-->
+
+        <!--#region BUTTONS GRID ROW 6-->
+
+        <Grid Grid.Row="6" Grid.Column="3">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+
+
+
+
+            <Button Grid.Column="2" Grid.Row="2" Style="{StaticResource CkButton}" Command="{Binding SaveTemplateCommand}" Content="Template Speichern" HorizontalAlignment="Right" Width="140" Margin="5,0,5,0"  Background="{StaticResource ForegroundMainBrush}"/>
+            <Button Grid.Column="1" Grid.Row="2" Style="{StaticResource CkButton}" Content="Template Löschen" HorizontalAlignment="Right" Width="140" Margin="5,0,5,0" Background="Orange"/>
+            
+        </Grid>
 
         <!--#endregion-->
 

@@ -10,6 +10,9 @@ namespace BewerbungsTool.Contracts
     {
         string TemplateID { get; set; }
 
+        public string Headder {  get; set; }
+
+
         string Einleitung {  get; set; }
 
         string Hauptteil {  get; set; }
@@ -18,7 +21,7 @@ namespace BewerbungsTool.Contracts
 
         DateTime StartDatum { get; set; }
 
-
+        string StartDatumSatz { get; set; }
         
 
 
