@@ -1,4 +1,5 @@
-﻿using BewerbungsTool.Manager;
+﻿#define LoadManagerTests
+using BewerbungsTool.Manager;
 using BewerbungsTool.ViewModel;
 using System.Configuration;
 using System.Data;
@@ -15,8 +16,14 @@ namespace BewerbungsTool
         protected override void OnStartup(StartupEventArgs e)
         {
 
+#if LoadManagerTests
+
+            var test = LoadTemplateManager.Instance;
+#endif
+
+
             MainWindow window = new MainWindow();
-           
+
             window.DataContext = new MainWindowViewModel(window);
             window.Show();
 

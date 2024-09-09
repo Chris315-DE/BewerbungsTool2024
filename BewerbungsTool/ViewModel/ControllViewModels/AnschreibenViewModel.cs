@@ -18,14 +18,11 @@ namespace BewerbungsTool.ViewModel
         {
             BewerbungsTemplate = [];
             TemplateisSelected = false;
-           
 
 
-#if DEBUG
+            LoadTemplateManager.Instance.GeladeneTemplates.ForEach(template => { BewerbungsTemplate.Add(template); });
 
-            DebugTemplates();
 
-#endif
 
             AddTemplateCommand = new DelegateCommand(o => !string.IsNullOrEmpty(NeuesTemplate), o =>
             {
@@ -42,7 +39,7 @@ namespace BewerbungsTool.ViewModel
             });
 
 
-            SaveTemplateCommand = new DelegateCommand(o => TemplateisSelected, o => 
+            SaveTemplateCommand = new DelegateCommand(o => TemplateisSelected, o =>
             {
                 SaveTemplate(SelectedTemplate);
             });
@@ -176,7 +173,7 @@ namespace BewerbungsTool.ViewModel
         }
 
 
-        public DelegateCommand SaveTemplateCommand {  get; set; }
+        public DelegateCommand SaveTemplateCommand { get; set; }
 
         private void SaveTemplate(AnschreibenTemplate template)
         {
