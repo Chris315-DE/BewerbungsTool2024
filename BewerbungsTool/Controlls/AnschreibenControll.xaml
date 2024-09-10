@@ -120,7 +120,7 @@
 
 
             <Button Grid.Column="2" Grid.Row="2" Style="{StaticResource CkButton}" Command="{Binding SaveTemplateCommand}" Content="Template Speichern" HorizontalAlignment="Right" Width="140" Margin="5,0,5,0"  Background="{StaticResource ForegroundMainBrush}"/>
-            <Button Grid.Column="1" Grid.Row="2" Style="{StaticResource CkButton}" Content="Template Löschen" HorizontalAlignment="Right" Width="140" Margin="5,0,5,0" Background="Orange"/>
+            <local:HoldToSubmitButton Grid.Column="1" Grid.Row="2" Style="{StaticResource CkButton}" Content="Template Löschen" HorizontalAlignment="Right" Width="140"   Background="Orange" Command="{Binding DelCommand}"/>
             
         </Grid>
 

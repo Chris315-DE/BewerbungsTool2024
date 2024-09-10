@@ -208,7 +208,18 @@ namespace BewerbungsTool.ViewModel
 
         private static BriefkopfViewModel _instance;
 
-        public static BriefkopfViewModel Instance { get => (_instance ?? new BriefkopfViewModel()); }
+        public static BriefkopfViewModel Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new BriefkopfViewModel();
+                }
+                return _instance;
+            }
+
+        }
 
 
 
@@ -310,7 +321,7 @@ namespace BewerbungsTool.ViewModel
 
                 }
             }
-            else 
+            else
             {
                 FirmaName = "";
                 FirmaZuHänden = "";
@@ -359,7 +370,7 @@ namespace BewerbungsTool.ViewModel
                 }
             }
 
-            else 
+            else
             {
                 EigeneMail = "";
                 EigeneName = "";

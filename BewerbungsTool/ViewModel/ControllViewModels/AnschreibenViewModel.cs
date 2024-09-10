@@ -2,13 +2,7 @@
 using BewerbungsTool.Manager;
 using BewerbungsTool.Model;
 using BewerbungsTool.MvvmBasics;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BewerbungsTool.ViewModel
 {
@@ -44,7 +38,7 @@ namespace BewerbungsTool.ViewModel
                 SaveTemplate(SelectedTemplate);
             });
 
-
+            DelCommand = new DelegateCommand(o => { SelectedTemplate = null; });
 
         }
 
@@ -173,6 +167,9 @@ namespace BewerbungsTool.ViewModel
         }
 
 
+
+        public DelegateCommand DelCommand { get; set; }
+
         public DelegateCommand SaveTemplateCommand { get; set; }
 
         private void SaveTemplate(AnschreibenTemplate template)
@@ -184,6 +181,9 @@ namespace BewerbungsTool.ViewModel
 
 
         }
+
+
+
 
 
 

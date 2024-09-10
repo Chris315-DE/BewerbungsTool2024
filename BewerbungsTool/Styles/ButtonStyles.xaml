@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:con="clr-namespace:BewerbungsTool.Controlls" xmlns:converters="clr-namespace:BewerbungsTool.Converters">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Common.xaml"/>
@@ -304,5 +305,66 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+
+
+
+    <!--<Style TargetType="{x:Type con:HoldToSubmitButton}">
+
+        <Style.Resources>
+            <converters:MultiplyConverter x:Key="Multiconv"/>
+        </Style.Resources>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type con:HoldToSubmitButton}">
+                    <Grid>
+                        <Rectangle RadiusX="9" RadiusY="9" x:Name="Rect"
+                            Width="{TemplateBinding Width, Converter={StaticResource Multiconv},ConverterParameter=5}"
+                            Height="{TemplateBinding Height, Converter={StaticResource Multiconv},ConverterParameter=5}"
+                            Fill="{TemplateBinding Background}" 
+                                   Opacity="1">
+
+                            <Rectangle.Stroke>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                    <GradientStop Color="White" Offset="0.0"/>
+                                    <GradientStop Color="#666666" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Stroke>
+                        </Rectangle>
+                        <Rectangle x:Name="xShine" Margin="2,2,2,0" VerticalAlignment="Top" RadiusX="6" RadiusY="6" Opacity="1"
+                             Stroke="Transparent" Height="15px">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                    <GradientStop Color="#ccffffff" Offset="0"/>
+                                    <GradientStop Color="Transparent" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <TextBlock VerticalAlignment="Center" Width="{TemplateBinding Width, Converter={StaticResource Multiconv},ConverterParameter=4}" TextAlignment="Center" Text="{TemplateBinding Content}" TextWrapping="Wrap" FontSize="{TemplateBinding FontSize}"  HorizontalAlignment="Center"/>
+
+                        <Grid.Triggers>
+                            <EventTrigger RoutedEvent="MouseLeftButtonDown">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="Rect" Storyboard.TargetProperty="Width"
+                                                         To="{Binding Width, RelativeSource={RelativeSource TemplatedParent}}"/>
+
+                                        <DoubleAnimation Storyboard.TargetName="Rect" Storyboard.TargetProperty="Height"
+                                                         To="{Binding Height, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Grid.Triggers>
+
+
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>-->
+
+
+
 
 </ResourceDictionary>
