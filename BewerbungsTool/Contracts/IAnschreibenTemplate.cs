@@ -23,7 +23,10 @@ namespace BewerbungsTool.Contracts
 
         string StartDatumSatz { get; set; }
         
-
+        string UnterschriftPfad {  get; set; }
+        string BruttoGehalt {  get; set; }
+                
+        string BruttoGehaltSatz { get; set; }
 
     }
 }

@@ -16,10 +16,7 @@ namespace BewerbungsTool
         protected override void OnStartup(StartupEventArgs e)
         {
 
-#if LoadManagerTests
 
-            var test = LoadTemplateManager.Instance;
-#endif
 
 
             MainWindow window = new MainWindow();

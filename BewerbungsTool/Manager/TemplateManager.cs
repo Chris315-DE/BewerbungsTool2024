@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace BewerbungsTool.Manager
 {
-    public class LoadTemplateManager
+    public class TemplateManager
     {
         private string _Folder;
 
         public List<AnschreibenTemplate> GeladeneTemplates { get; private set; }
 
-        private LoadTemplateManager()
+        private TemplateManager()
         {
             _Folder = Path.Combine(AppContext.BaseDirectory, typeof(AnschreibenTemplate).Name);
 
@@ -27,6 +27,14 @@ namespace BewerbungsTool.Manager
 
         private void LadeTemplates()
         {
+
+
+            if (!Directory.Exists(_Folder))
+            {
+                Directory.CreateDirectory(_Folder);
+                return;
+            }
+
 
             var files = Directory.GetFiles(_Folder);
 
@@ -43,9 +51,31 @@ namespace BewerbungsTool.Manager
 
         }
 
-        private static LoadTemplateManager _instance;
 
-        public static LoadTemplateManager Instance => _instance ?? (_instance = new LoadTemplateManager());
+
+        public void Löschetemplate(string template)
+        {
+
+            GeladeneTemplates = [];
+            string debug = template + ".json";
+            debug = Path.Combine(_Folder, debug);
+            if(File.Exists(Path.Combine(_Folder, template+".json")))
+            {
+               File.Delete(debug);
+
+            }
+
+            LadeTemplates(); 
+               
+
+
+        }
+
+
+
+        private static TemplateManager _instance;
+
+        public static TemplateManager Instance => _instance ?? (_instance = new TemplateManager());
 
 
 

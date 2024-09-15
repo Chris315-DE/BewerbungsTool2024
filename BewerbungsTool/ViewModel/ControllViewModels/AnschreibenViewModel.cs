@@ -2,6 +2,7 @@
 using BewerbungsTool.Manager;
 using BewerbungsTool.Model;
 using BewerbungsTool.MvvmBasics;
+using Microsoft.Win32;
 using System.Collections.ObjectModel;
 
 namespace BewerbungsTool.ViewModel
@@ -14,7 +15,7 @@ namespace BewerbungsTool.ViewModel
             TemplateisSelected = false;
 
 
-            LoadTemplateManager.Instance.GeladeneTemplates.ForEach(template => { BewerbungsTemplate.Add(template); });
+            TemplateManager.Instance.GeladeneTemplates.ForEach(template => { BewerbungsTemplate.Add(template); });
 
 
 
@@ -38,23 +39,36 @@ namespace BewerbungsTool.ViewModel
                 SaveTemplate(SelectedTemplate);
             });
 
-            DelCommand = new DelegateCommand(o => { SelectedTemplate = null; });
-
-        }
-
-        private void DebugTemplates()
-        {
-            BewerbungsTemplate.Add(new AnschreibenTemplate("DEBUG")
+            DelCommand = new DelegateCommand(o => TemplateisSelected, o =>
             {
-                Einleitung = "Hallo ich bin GOD GAMER \nUnd werde euch alle Versklaven HAHA ich bin GodGamer",
-                Headder = "Bewerbung als GodGamer",
-                Hauptteil = "Ich bin euer MEISTER MUHAHAH",
-                Abschluss = "ALso Kniet Nieder",
-                StartDatum = DateTime.Now.AddDays(30)
+
+                string todel = SelectedTemplate.TemplateID;
+
+                SelectedTemplate = null;
+                SaveTemplateCommand.RaiseCanExecuteChanged();
+                TemplateisSelected = false;
+                BewerbungsTemplate.Clear();
+
+                TemplateManager.Instance.Löschetemplate(todel);
+
+                TemplateManager.Instance.GeladeneTemplates.ForEach(template =>
+                {
+                    BewerbungsTemplate.Add(template);
+
+
+
+
+                });
             });
 
 
+            UnterschriftLadenCommand = new DelegateCommand(o => TemplateisSelected, o => UnterschriftLaden());
         }
+
+
+
+
+
 
         private bool _TemplateisSelected;
 
@@ -68,6 +82,8 @@ namespace BewerbungsTool.ViewModel
                     _TemplateisSelected = value;
                     RaisPropertyChanged();
                     SaveTemplateCommand.RaiseCanExecuteChanged();
+                    UnterschriftLadenCommand.RaiseCanExecuteChanged();
+                    DelCommand.RaiseCanExecuteChanged();
                 }
             }
         }
@@ -167,6 +183,7 @@ namespace BewerbungsTool.ViewModel
         }
 
 
+        public DelegateCommand UnterschriftLadenCommand { get; set; }
 
         public DelegateCommand DelCommand { get; set; }
 
@@ -182,7 +199,19 @@ namespace BewerbungsTool.ViewModel
 
         }
 
+        private void UnterschriftLaden()
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.DefaultExt = ".png";
+            dialog.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg";
+            Nullable<bool> result = dialog.ShowDialog();
+            dialog.Multiselect = false;
+            if (result == true)
+            {
+                SelectedTemplate.UnterschriftPfad = dialog.FileName;
+            }
 
+        }
 
 
 

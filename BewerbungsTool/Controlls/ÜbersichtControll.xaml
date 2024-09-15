@@ -12,7 +12,17 @@
 
 
     <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
         <Button Content="TestLatex" Command="{Binding TestLatexCommand}" />
+
+        <local:LebenslaufStatList Grid.Row="1" DataContext="{Binding LebenslaufStatsListViewModel}"/>
+
     </Grid>
-    
+
 </UserControl>

@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="BewerbungsTool.Controlls.LebenslaufStatList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BewerbungsTool.Controlls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="250">
+    <Grid d:Background="White">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Lebenslauf Skills:"/>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Button Style="{StaticResource CkButton}" Background="Blue" Command="{Binding AddItemCommand}" Width="30" Margin="5" Content="+"/>
+                <Button Style="{StaticResource SystemButton}" Background="Red" Margin="5" Content="-"/>
+            </StackPanel>
+        </Grid>
+        
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding LebenslaufStatList}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <local:LebenslaufStatsItem/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>    
+    </Grid>
+</UserControl>

@@ -1,5 +1,6 @@
 ﻿using BewerbungsTool.LatexService;
 using BewerbungsTool.MvvmBasics;
+using BewerbungsTool.ViewModel.ControllViewModels;
 
 namespace BewerbungsTool.ViewModel
 {
@@ -7,17 +8,20 @@ namespace BewerbungsTool.ViewModel
     {
         private ÜbersichtsViewModel()
         {
-            TestLatexCommand = new(o => 
+            TestLatexCommand = new(o =>
             {
                 CoverLetterCreator creator = new CoverLetterCreator(AnschreibenViewModel.Instance.SelectedTemplate);
             });
-        }
 
+            LebenslaufStatsListViewModel = LebenslaufStatListViewModel.Instance;
+
+
+        }
         private static ÜbersichtsViewModel _instance;
 
         public static ÜbersichtsViewModel Instance => (_instance ?? new ÜbersichtsViewModel());
 
-
+        public LebenslaufStatListViewModel LebenslaufStatsListViewModel { get; set; }
 
 
         public DelegateCommand TestLatexCommand { get; set; }

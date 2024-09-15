@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,14 +28,23 @@ namespace BewerbungsTool.LatexService
                 Directory.CreateDirectory(SavePath);
             }
 
-            int countfiles = Directory.GetFiles(SavePath).Length;
+
+            int countfiles = 0;
+            var files = Directory.GetFiles(SavePath);
+            foreach (var file in files)
+            {
+                if (file.Contains(".tex"))
+                    countfiles++;
+            }
+
+
 
             FilePath = Path.Combine(SavePath, $"cover_letter{countfiles}.tex");
 
 
             InitBriefkopfEigeneAdresse();
             InitBriefkopfFirmaAdresse();
-
+            AnschreibenTextGen();
 
             WriteAndSafe();
 
@@ -353,19 +363,66 @@ namespace BewerbungsTool.LatexService
         string GesammtLatexFirmaBriefkopf;
         private void InitBriefkopfFirmaAdresse()
         {
+            string zuhänden;
+            if (!string.IsNullOrEmpty(Briefkopf.FirmaPerson))
+            {
+                zuhänden = Briefkopf.FirmaZuHänden + @" \newline " + Briefkopf.FirmaPerson + " ";
+            }
+            else
+            {
+                zuhänden = "Personalabteilung";
+            }
+
+
             GesammtLatexFirmaBriefkopf = FirmaLatexStart + Briefkopf.FirmaName.Replace("/r", "") + "\n"
-               + "}" + FirmaLatex1 + Briefkopf.FirmaStraße.Replace("\r", string.Empty) + FirmaLatex1 +
-               Briefkopf.FirmaPlzStadt.Replace("/r", string.Empty) +"}"
-               + FirmaLatex2 + Briefkopf.EigenePlzStadt.Substring(5)+FirmaLatex3;
+               + "}" + FirmaLatex1 + zuhänden + FirmaLatex1 + Briefkopf.FirmaStraße.Replace("\r", string.Empty) + FirmaLatex1 +
+               Briefkopf.FirmaPlzStadt.Replace("/r", string.Empty) + "}"
+               + FirmaLatex2 + Briefkopf.EigenePlzStadt.Substring(5) + FirmaLatex3;
         }
-        
+
+
+        #endregion
+
+
+        #region AnschreibenText
+
+        private string Anschreibentext;
+
+        private void AnschreibenTextGen()
+        {
+            string latex1 = @"\cvtext{\large{\textbf{" + SelectedAnschreibenTemplate.Headder + @"}}}\\[50pt]";
+            string latex2 = @"\cvtext{" + Briefkopf.AnredeVorschau + @",\newline \newline}\\[40pt]";
+            string latex3 = @"\cvtext{" + SelectedAnschreibenTemplate.Einleitung + @" \newline \newline \newline ";
+            string latex4 = "\n" + SelectedAnschreibenTemplate.Hauptteil + @"}\\[25pt]";
+            string latex5 = @"\cvtext{" + SelectedAnschreibenTemplate.StartDatumSatz + @" \newline ";
+
+            if (!string.IsNullOrEmpty(SelectedAnschreibenTemplate.BruttoGehaltSatz))
+            {
+                latex5 += SelectedAnschreibenTemplate.BruttoGehaltSatz + @". \newline ";
+            }
+
+
+            latex5 += SelectedAnschreibenTemplate.Abschluss + @"}\\[100pt]";
+
+
+            string latex6 = @"Mit freundlichen Grüßen, \newline ";
+
+            string latex7 = @"\includegraphics {" + SelectedAnschreibenTemplate.UnterschriftPfad.Replace('\\','/') + 
+                @"} \newline \cvtext{" + Briefkopf.EigeneName + "}" ;
+
+         //\includegraphics[width =\linewidth]{ .. / resources / image.jpg}
+
+            Anschreibentext = latex1 + latex2 + latex3 + latex4 + latex5 + latex6 + latex7;
+
+        }
+
 
         #endregion
 
 
         private void WriteAndSafe()
         {
-            File.WriteAllText(FilePath, initLatexSetup + EigenAdresseBriefkopf + GesammtLatexFirmaBriefkopf + @"\end{document}");
+            File.WriteAllText(FilePath, initLatexSetup + EigenAdresseBriefkopf + GesammtLatexFirmaBriefkopf + Anschreibentext + @"\end{document}");
         }
         private void InitBriefkopfEigeneAdresse()
         {

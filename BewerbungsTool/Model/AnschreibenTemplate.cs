@@ -2,6 +2,7 @@
 using BewerbungsTool.MvvmBasics;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +26,7 @@ namespace BewerbungsTool.Model
         public string StartDatumSatz
         {
             get => _StartDatumSatz;
-             set
+            set
             {
                 if (value != _StartDatumSatz)
                 {
@@ -66,6 +67,73 @@ namespace BewerbungsTool.Model
                 }
             }
         }
+
+        public string UnterschriftPfad
+        {
+            get
+            {
+                if (!File.Exists(_UnterschriftPfad))
+                    _UnterschriftPfad = "";
+                return _UnterschriftPfad;
+            }
+            set
+            {
+                if (value != _UnterschriftPfad)
+                {
+                    if (!File.Exists(value))
+                    {
+                        _UnterschriftPfad = "";
+                    }
+                    else
+                    {
+                        _UnterschriftPfad = value;
+
+                    }
+
+                    RaisPropertyChanged();
+                }
+            }
+        }
+
+        private string _UnterschriftPfad;
+
+        private string _BruttoGehalt;
+
+        public string BruttoGehalt
+        {
+            get => _BruttoGehalt;
+            set
+            {
+                if (value != _BruttoGehalt)
+                {
+                    _BruttoGehalt = value;
+                    RaisPropertyChanged();
+                    if (!string.IsNullOrEmpty(_BruttoGehalt))
+                    {
+                        BruttoGehaltSatz = $"Ich strebe ein Bruttojahresgehalt in Höhe von {BruttoGehalt} Euro an";
+                    }
+                }
+            }
+        }
+
+
+
+
+
+        private string _BruttoGehaltSatz;
+        public string BruttoGehaltSatz
+        {
+            get => _BruttoGehaltSatz;
+            set
+            {
+                if (value != _BruttoGehaltSatz)
+                {
+                    _BruttoGehaltSatz = value;
+                    RaisPropertyChanged();
+                }
+            }
+        }
+
         private DateTime _StartDatum;
 
         public bool Equals(AnschreibenTemplate? other)
