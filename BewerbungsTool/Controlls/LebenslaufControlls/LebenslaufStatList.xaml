@@ -23,7 +23,7 @@
 
             <StackPanel Grid.Column="1" Orientation="Horizontal">
                 <Button Style="{StaticResource CkButton}" Background="Blue" Command="{Binding AddItemCommand}" Width="30" Margin="5" Content="+"/>
-                <Button Style="{StaticResource SystemButton}" Background="Red" Margin="5" Content="-"/>
+                <Button Style="{StaticResource CkButton}" Background="Red" Margin="5" Content="-" Width="30" Command="{Binding RemoveItemCommand}"/>
             </StackPanel>
         </Grid>
         

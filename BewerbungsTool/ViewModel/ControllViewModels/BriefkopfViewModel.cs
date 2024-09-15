@@ -1,4 +1,6 @@
 ﻿using BewerbungsTool.Enums;
+using BewerbungsTool.Manager;
+using BewerbungsTool.Model;
 using BewerbungsTool.MvvmBasics;
 using System;
 using System.Collections.Generic;
@@ -177,11 +179,24 @@ namespace BewerbungsTool.ViewModel
         #endregion
 
 
-
+        private EigeneAnschriftLoader _EigeneAnschriftLoader = EigeneAnschriftLoader.Instance;
 
 
         private BriefkopfViewModel()
         {
+
+
+            /*EigeneName = "";
+                EigeneStraße = "";
+                EigenePlzStadt = "";
+                EigeneTel = "";
+                EigeneMail = ""; */
+
+            var dto = _EigeneAnschriftLoader.GeladeneAnschrift;
+            if (dto != null)
+            {
+                EigeneAnschrift = dto.EigeneName + "\n" + dto.EigeneStraße + "\n" + dto.EigenePlzStadt + "\n" + dto.EigeneTel +"\n" +dto.EigeneMail;
+            }
 
             SelectAnredeCommand = new(o =>
             {
@@ -200,6 +215,15 @@ namespace BewerbungsTool.ViewModel
                             break;
                     }
                 }
+            });
+
+            SpeicherAnschriftCommand = new(o => CheckEigeneAdresse(), o =>
+            {
+                SaveManager<EigeneAnschriftDTO> saveManager = new
+                SaveManager<EigeneAnschriftDTO>(
+                    new EigeneAnschriftDTO(EigeneName.Trim(), EigeneStraße.Trim(), EigenePlzStadt.Trim(), EigeneMail.Trim() ?? string.Empty, EigeneTel.Trim() ?? string.Empty));
+
+                saveManager.Save("EigeneAdresse");
             });
 
 
@@ -349,6 +373,8 @@ namespace BewerbungsTool.ViewModel
                     EigenePlzStadt = AnschriftArray[2];
                     EigeneTel = AnschriftArray[3];
                     EigeneMail = AnschriftArray[4];
+
+                    SpeicherAnschriftCommand?.RaiseCanExecuteChanged();
                 }
                 if (AnschriftArray.Length == 4)
                 {
@@ -372,23 +398,33 @@ namespace BewerbungsTool.ViewModel
 
             else
             {
-                EigeneMail = "";
                 EigeneName = "";
                 EigeneStraße = "";
                 EigenePlzStadt = "";
                 EigeneTel = "";
+                EigeneMail = "";
             }
-
-
-
-
-
-
         }
+
+        private bool CheckEigeneAdresse()
+        {
+
+            if (string.IsNullOrEmpty(EigeneName) ||
+                string.IsNullOrEmpty(EigeneStraße) ||
+                string.IsNullOrEmpty(EigenePlzStadt))
+                return false;
+
+            return true;
+        }
+
+
+
+
+
 
         public DelegateCommand SelectAnredeCommand { get; set; }
 
-
+        public DelegateCommand SpeicherAnschriftCommand { get; set; }
 
 
     }
