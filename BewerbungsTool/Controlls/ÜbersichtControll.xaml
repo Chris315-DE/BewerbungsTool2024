@@ -14,7 +14,8 @@
     <Grid d:Background="White">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/> 
+            <RowDefinition Height="auto"/> 
             <RowDefinition Height="*"/>
            
         </Grid.RowDefinitions>
@@ -37,8 +38,14 @@
         </Grid>
 
         <!--<Button Content="TestLatex" Command="{Binding TestLatexCommand}" />-->
-
-        <local:LebenslaufStatList Grid.Row="1" DataContext="{Binding LebenslaufStatsListViewModel}"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <local:LebenslaufBerufserfahrungItem Grid.Row="1" Grid.Column="1" DataContext="{Binding testModel}"/>
+        </Grid>
+        <local:LebenslaufStatList Grid.Row="2" DataContext="{Binding LebenslaufStatsListViewModel}"/>
 
     </Grid>
 

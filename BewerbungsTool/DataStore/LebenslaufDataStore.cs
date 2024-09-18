@@ -17,6 +17,15 @@ namespace BewerbungsTool.DataStore
 
         public event Action<LebenslaufStatsItemViewModel> LebenslaufStatItemChanged;
         public event Action<LebenslaufKontaktItemViewModel> LebenslaufKontaktItemChanged;
+        public event Action<LebenslaufBerufserfahrungItemViewModel> LebenslaufBerufItemChanged;
+
+
+
+        public void OnSelectedLebenslaufBerufItemChanged(LebenslaufBerufserfahrungItemViewModel model)
+        {
+            LebenslaufBerufItemChanged?.Invoke(model);
+        }
+
 
         public void OnSelectedLebenslaufStatItemChanged(LebenslaufStatsItemViewModel model)
         {

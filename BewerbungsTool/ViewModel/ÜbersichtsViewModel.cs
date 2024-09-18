@@ -17,6 +17,7 @@ namespace BewerbungsTool.ViewModel
             LebenslaufPersonenInfoViewModel = new();
 
             TestViewModel = LebenslaufKontaktListViewModel.Instance;
+            testModel = new LebenslaufBerufserfahrungItemViewModel("Demo", "08/2022 - heute", "EGS Konstanz", "Aufgabenbereich: ", ".Net Entwickler mit den schwerpunkten auf Desktop Client Anwendungen (WPF) und .Net-MAUI für Android Apps");
 
         }
         private static ÜbersichtsViewModel _instance;
@@ -28,6 +29,8 @@ namespace BewerbungsTool.ViewModel
         public LebenslaufPersonenInfoViewModel LebenslaufPersonenInfoViewModel { get; set; }
 
         public DelegateCommand TestLatexCommand { get; set; }
+
+        public LebenslaufBerufserfahrungItemViewModel testModel { get; set; }
 
 
         public LebenslaufKontaktListViewModel TestViewModel { get; set; }
