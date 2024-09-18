@@ -11,7 +11,7 @@
 
 
 
-    <Grid>
+    <Grid d:Background="White">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -25,6 +25,15 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
         <local:LebenslaufPersonenInfo DataContext="{Binding LebenslaufPersonenInfoViewModel}"/>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <local:LebenslaufKontaktList  DataContext="{Binding TestViewModel}" Grid.Column="1"/>
+                
+            </Grid>
+          
         </Grid>
 
         <!--<Button Content="TestLatex" Command="{Binding TestLatexCommand}" />-->

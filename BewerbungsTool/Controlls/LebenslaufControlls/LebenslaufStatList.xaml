@@ -4,37 +4,78 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BewerbungsTool.Controlls"
+             xmlns:converters="clr-namespace:BewerbungsTool.Converters"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="250">
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="boolvconv"/>
+        <converters:SliderToTextboxValueConverter x:Key="SliderConv"/>
+        <converters:SliderToBrushConverter x:Key="BrushConv"/>
+    </UserControl.Resources>
+
+
     <Grid d:Background="White">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Lebenslauf Skills:"/>
+            <Label Margin="5,0" Grid.Column="0" Background="{StaticResource BrushBackroundLigth}"  HorizontalContentAlignment="Center" Content="Lebenslauf Skills:" FontSize="20" FontFamily="{StaticResource LatoHeavy}"/>
 
-            <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <Button Style="{StaticResource CkButton}" Background="Blue" Command="{Binding AddItemCommand}" Width="30" Margin="5" Content="+"/>
-                <Button Style="{StaticResource CkButton}" Background="Red" Margin="5" Content="-" Width="30" Command="{Binding RemoveItemCommand}"/>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Background="{StaticResource BrushBackroundLigth}">
+                <Button Style="{StaticResource CkButton}" Background="{StaticResource BackgroundBrush}" Command="{Binding AddItemCommand}" Width="40" Height="40" Margin="5" Content="+"/>
+                <Button Style="{StaticResource CkButton}" Background="{StaticResource BackgroundBrush}" Margin="5" Content="-" Width="40" Command="{Binding RemoveItemCommand}"/>
             </StackPanel>
         </Grid>
-        
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+
+        <Border  Grid.Row="1" BorderBrush="Black" BorderThickness="0.1">
+
+            <Grid Grid.Row="1">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox Background="LightGray" Style="{StaticResource TextBoxPlaxeholder}" Grid.Column="0" Tag="Fähigkeit zb. C# .Net" Text="{Binding Fähigkeit}" />
+
+                <Grid Grid.Row="0" Grid.Column="2">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Slider Margin="0,5,0,0" Height="30"  Grid.Row="0" Background="LightGray" Grid.Column="0" Maximum="10" Minimum="0" IsSnapToTickEnabled="True" TickPlacement="BottomRight"  Value="{Binding SliderValue}"/>
+                    <!--  <Label Grid.Row="1" Content="{Binding SliderValue}"/> -->
+                    <ProgressBar Margin="0,0,0,5" Height="30" Background="LightGray" Grid.Row="1" Minimum="0" Maximum="10" Value="{Binding SliderValue}" Foreground="{Binding SliderValue, Converter={StaticResource BrushConv}}" />
+                    <TextBlock Background="Transparent" ClipToBounds="True" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Text="{Binding SliderValue, Converter={StaticResource SliderConv}}" />
+
+                </Grid>
+
+
+            </Grid>
+
+        </Border>
+
+
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
             <ItemsControl ItemsSource="{Binding LebenslaufStatList}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <local:LebenslaufStatsItem/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
+              
+
             </ItemsControl>
-        </ScrollViewer>    
+        </ScrollViewer>
     </Grid>
 </UserControl>

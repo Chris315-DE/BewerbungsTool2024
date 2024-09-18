@@ -120,7 +120,7 @@
     </Style>
 
     <Style x:Key="TextBoxPlaxeholder" TargetType="{x:Type TextBox}" BasedOn="{StaticResource BaseStyle}">
-        <Setter Property="FontFamily" Value="{StaticResource LatoHeavy}"/>
+        
         <Setter Property="Padding"  Value="10"/>
         <Setter Property="Margin"  Value="5 5 5 5"/>
         <Setter Property="BorderBrush" Value="{StaticResource BrushBackroundLigth}"  />
@@ -142,7 +142,7 @@
                                    Text="{TemplateBinding Tag}" 
                                    FontSize="{TemplateBinding FontSize}"
                                    x:Name="placeholder" 
-                                   FontFamily="{StaticResource LatoThin}" Padding="{TemplateBinding Padding}"  Margin="{TemplateBinding Margin}"
+                                   FontFamily="{TemplateBinding FontFamily}" Padding="{TemplateBinding Padding}"  Margin="{TemplateBinding Margin}"
                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                    Foreground="{TemplateBinding Foreground}"
                                    >
@@ -274,7 +274,7 @@
                                 </LinearGradientBrush>
                             </Rectangle.Fill>
                         </Rectangle>
-                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{TemplateBinding Content}" FontFamily="{TemplateBinding FontFamily}" />
                     </Grid>
 
                     <ControlTemplate.Triggers>

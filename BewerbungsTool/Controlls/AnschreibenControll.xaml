@@ -114,8 +114,8 @@
 
 
 
-        <Label Grid.Row="7" Grid.Column="0" Content="UnterschriftJPG:" />
-        <Button Style="{StaticResource CkButton}" Command="{Binding UnterschriftLadenCommand}" Background="{StaticResource BackgroundBrush}" Content="Unterschrift Laden" Grid.Row="7" Grid.Column="1" />
+        <Label Grid.Row="7" Grid.Column="0" FontFamily="{StaticResource FAnew}" Content="UnterschriftJPG:" />
+        <Button Style="{StaticResource CkButton}" Command="{Binding UnterschriftLadenCommand}" Background="{StaticResource BackgroundBrush}" FontFamily="{StaticResource FAnew}" Content="Unterschrift Laden" Grid.Row="7" Grid.Column="1" />
         <Label Grid.Row="7" Grid.Column="2" Content="{Binding SelectedTemplate.UnterschriftPfad}" IsEnabled="{Binding TemplateisSelected}"/>
 
 

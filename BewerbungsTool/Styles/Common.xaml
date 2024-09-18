@@ -59,7 +59,8 @@
     <FontFamily x:Key="LatoThin">pack://application;,,,/Fonts/#Lato Thin</FontFamily>
     <FontFamily x:Key="LatoRegular">pack://application;,,,/Fonts/#Lato Regular</FontFamily>
     <FontFamily x:Key="LatoHeavy">pack://application;,,,/Fonts/#Lato Heavy</FontFamily>
-
+    <FontFamily x:Key="FA2">pack://application;,,,/Fonts/#FontAwesome</FontFamily>
+    <FontFamily x:Key="FA">pack://application;,,,/Fonts/#Font Awesome 6 Free Solid</FontFamily>
 
 
     <Style TargetType="{x:Type Control}" x:Key="BaseStyle">
@@ -67,7 +68,7 @@
     </Style>
 
     <Style TargetType="{x:Type TextBlock}" x:Key="BaseTextblockStyle">
-        <Setter Property="FontFamily" Value="{StaticResource LatoRegular}"/>
+        <Setter Property="FontFamily" Value="{StaticResource FAnew}"/>
     </Style>
 
 

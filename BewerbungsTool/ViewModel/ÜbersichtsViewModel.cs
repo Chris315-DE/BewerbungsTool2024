@@ -16,6 +16,8 @@ namespace BewerbungsTool.ViewModel
             LebenslaufStatsListViewModel = LebenslaufStatListViewModel.Instance;
             LebenslaufPersonenInfoViewModel = new();
 
+            TestViewModel = LebenslaufKontaktListViewModel.Instance;
+
         }
         private static ÜbersichtsViewModel _instance;
 
@@ -26,6 +28,10 @@ namespace BewerbungsTool.ViewModel
         public LebenslaufPersonenInfoViewModel LebenslaufPersonenInfoViewModel { get; set; }
 
         public DelegateCommand TestLatexCommand { get; set; }
+
+
+        public LebenslaufKontaktListViewModel TestViewModel { get; set; }
+
     }
 
 

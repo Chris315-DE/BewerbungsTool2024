@@ -42,6 +42,13 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
                 {
                     _SelectedItem = value;
                     RaisPropertyChanged();
+                    if (SelectedItem != null)
+                    {
+                        Fähigkeit = SelectedItem.Fähigkeit;
+                        SliderValue = SelectedItem.SliderValue;
+
+                    }
+
                 }
             }
         }
@@ -56,7 +63,9 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
 
             AddItemCommand = new DelegateCommand(o =>
             {
-                LebenslaufStatList.Add(new LebenslaufStatsItemViewModel());
+                var add = new LebenslaufStatsItemViewModel(string.Empty, "1");
+                LebenslaufStatList.Insert(0, add);
+                manageSelectedItem(add);
                 RemoveItemCommand?.RaiseCanExecuteChanged();
             });
 
@@ -66,6 +75,7 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
                 RemoveItemCommand?.RaiseCanExecuteChanged();
             });
 
+            SliderValue = "1";
         }
 
         private void manageSelectedItem(LebenslaufStatsItemViewModel obj)
@@ -79,9 +89,13 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
 
             foreach (var item in LebenslaufStatList)
             {
-                item.isSelected = false;
+                item.IsSelected = false;
             }
-            LebenslaufStatList[index].isSelected = true;
+            LebenslaufStatList[index].IsSelected = true;
+            SliderValue = SelectedItem.SliderValue;
+            Fähigkeit = SelectedItem.Fähigkeit;
+
+
 
         }
 
@@ -94,7 +108,7 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
             if (LebenslaufStatList.Count > 0)
             {
                 SelectedItem = LebenslaufStatList[0];
-                LebenslaufStatList[0].isSelected = true;
+                LebenslaufStatList[0].IsSelected = true;
             }
 
         }
@@ -106,6 +120,47 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
         public DelegateCommand AddItemCommand { get; set; }
 
         public DelegateCommand RemoveItemCommand { get; set; }
+
+        private string _Fähigkeit;
+
+        public string Fähigkeit
+        {
+            get => _Fähigkeit;
+            set
+            {
+                if (value != _Fähigkeit)
+                {
+                    _Fähigkeit = value;
+                    RaisPropertyChanged();
+
+                    if (SelectedItem != null)
+                    {
+                        SelectedItem.Fähigkeit = value;
+                    }
+                }
+            }
+        }
+        private string _SliderValue;
+        public string SliderValue
+        {
+            get => _SliderValue;
+            set
+            {
+                if (_SliderValue != value)
+                {
+                    _SliderValue = value;
+                    RaisPropertyChanged();
+
+                    if (SelectedItem != null)
+                    {
+                        SelectedItem.SliderValue = value;
+                    }
+
+
+                }
+            }
+        }
+
 
     }
 }

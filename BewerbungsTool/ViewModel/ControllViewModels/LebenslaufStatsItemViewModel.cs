@@ -14,13 +14,16 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
 
         LebenslaufDataStore dataStore;
 
-        public LebenslaufStatsItemViewModel()
+        public LebenslaufStatsItemViewModel(string fähigkeit, string value)
         {
 
 
+            Fähigkeit = fähigkeit;
+            SliderValue = value;
+
             dataStore = LebenslaufDataStore.Instance;
-            isSelected = false;
-            SliderValue = "1";
+            IsSelected = false;
+
 
 
             IsSelectedCommand = new DelegateCommand(o =>
@@ -35,7 +38,7 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
         private string _SliderValue;
         private string _Fähigkeit;
 
-        public bool isSelected
+        public bool IsSelected
         {
             get => _isSelected;
             set
@@ -56,7 +59,7 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
                 {
                     _SliderValue = value;
                     RaisPropertyChanged();
-                    dataStore.OnSelectedLebenslaufStatItemChanged(this);
+                    dataStore?.OnSelectedLebenslaufStatItemChanged(this);
                 }
             }
         }
@@ -69,7 +72,7 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
                 {
                     _Fähigkeit = value;
                     RaisPropertyChanged();
-                    dataStore.OnSelectedLebenslaufStatItemChanged(this);
+                    dataStore?.OnSelectedLebenslaufStatItemChanged(this);
                 }
             }
         }
