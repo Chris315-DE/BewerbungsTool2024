@@ -43,7 +43,11 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <local:LebenslaufBerufserfahrungItem Grid.Row="1" Grid.Column="1" DataContext="{Binding testModel}"/>
+
+            <local:LebenslaufBildungsList DataContext="{Binding testModel}"/>
+
+
+
         </Grid>
         <local:LebenslaufStatList Grid.Row="2" DataContext="{Binding LebenslaufStatsListViewModel}"/>
 

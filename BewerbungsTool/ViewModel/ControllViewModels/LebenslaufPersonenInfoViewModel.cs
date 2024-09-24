@@ -10,9 +10,11 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
     public class LebenslaufPersonenInfoViewModel : BaseViewModel
     {
 
+        private static LebenslaufPersonenInfoViewModel _instance;
 
+        public static LebenslaufPersonenInfoViewModel Instance => _instance?? (_instance = new LebenslaufPersonenInfoViewModel());
 
-        public LebenslaufPersonenInfoViewModel()
+        private LebenslaufPersonenInfoViewModel()
         {
 
         }

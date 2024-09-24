@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="BewerbungsTool.Controlls.LebenslaufBildungsItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BewerbungsTool.Controlls" 
+             xmlns:conv="clr-namespace:BewerbungsTool.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="200">
+    <UserControl.Resources>
+        <conv:BoolToBrushConverter x:Key="BrushConv"/>
+    </UserControl.Resources>
+
+
+    <Border Background="{Binding IsSelected, Converter={StaticResource BrushConv}}">
+        <Border.InputBindings>
+            <MouseBinding MouseAction="LeftClick" Command="{Binding SelectCommand}"/>
+        </Border.InputBindings>
+        <Grid d:Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="{Binding VonBis, FallbackValue=10/2017 - 07/2020}"/>
+
+            <Label Grid.Row="1" FontWeight="Bold" Content="{Binding Was,FallbackValue=Wirtschaftsinformatik (M.Sc.)}"/>
+
+            <Label Grid.Row="2" FontWeight="Light" Content="{Binding Wo, FallbackValue=Universität Regensburg}"/>
+
+            <TextBlock Grid.Row="3" TextWrapping="Wrap" Text="{Binding Beschreibung,FallbackValue=IT-Sicherheit Data Science Masterarbeit  „Vom Edge zur  Cloud: eine explorative Studie zum Austausch und der Analyse von IoT-Daten“.}"/>
+        </Grid>
+
+    </Border>
+
+</UserControl>

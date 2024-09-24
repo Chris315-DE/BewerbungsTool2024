@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace BewerbungsTool.Manager
@@ -16,7 +17,21 @@ namespace BewerbungsTool.Manager
 
         private BaseViewModel _viewModel;
 
+        private BaseViewModel _LebenslaufUnterViewModel;
 
+
+        public BaseViewModel LebenslaufUnterViewModel
+        {
+            get => _LebenslaufUnterViewModel;
+            set
+            {
+                if (_LebenslaufUnterViewModel != value)
+                {
+                    _LebenslaufUnterViewModel = value;
+                    OnPropertyChanged(nameof(LebenslaufUnterViewModel));
+                }
+            }
+        }
 
 
         public BaseViewModel CurrentViewModel
@@ -37,7 +52,7 @@ namespace BewerbungsTool.Manager
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
-       
+
 
         public ICommand UpdateCurrentViewModel => throw new NotImplementedException();
 

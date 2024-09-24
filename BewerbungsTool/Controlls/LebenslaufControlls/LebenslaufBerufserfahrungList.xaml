@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="BewerbungsTool.Controlls.LebenslaufBerufserfahrungList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BewerbungsTool.Controlls"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="400">
+    <Grid d:Background="White">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBox Style="{StaticResource TextBoxPlaxeholder}" Text="{Binding Tätigkeit}"  Background="{StaticResource BrushBackroundLigth}" Tag="Tätigkeit" Height="40" FontSize="10" Margin="5,8,5,2" />
+        <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button Style="{StaticResource CkButton}" Command="{Binding AddCommand}" Content="+" Margin="5" Background="{StaticResource BackgroundBrush}" Width="50" HorizontalAlignment="Left"/>
+            <Button Style="{StaticResource CkButton}" Content="-" Margin="5" Background="{StaticResource BackgroundBrush}" Width="50" HorizontalAlignment="Left"/>
+        </StackPanel>
+        
+        <TextBox Style="{StaticResource TextBoxPlaxeholder}" Background="LightGray" Grid.Row="1" Grid.Column="1" Height="40" FontSize="10" Text="{Binding VonBis}" Tag="MM/YYYY - MM/YYYY"/>
+        <TextBox Style="{StaticResource TextBoxPlaxeholder}" Background="LightGray" Grid.Row="1" Tag="Arbeitgeber" Height="40" Text="{Binding Arbeitgeber}"  FontSize="10" />
+
+        <TextBox Style="{StaticResource TextBoxPlaxeholder}" AcceptsReturn="True" Text="{Binding Beschreibung}" Background="{StaticResource BrushBackroundLigth}" Grid.Row="2" Grid.ColumnSpan="2" Tag="Beschreibung der Tätigkeit"/>
+
+
+        <ScrollViewer Grid.Row="3" Grid.ColumnSpan="2" >
+            <ItemsControl ItemsSource="{Binding Items}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <local:LebenslaufBerufserfahrungItem/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            
+        </ScrollViewer>
+        
+    </Grid>
+</UserControl>

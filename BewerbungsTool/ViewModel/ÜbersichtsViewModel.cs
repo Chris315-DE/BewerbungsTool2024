@@ -4,7 +4,7 @@ using BewerbungsTool.ViewModel.ControllViewModels;
 
 namespace BewerbungsTool.ViewModel
 {
-    public class ÜbersichtsViewModel : BaseViewModel 
+    public class ÜbersichtsViewModel : BaseViewModel
     {
         private ÜbersichtsViewModel()
         {
@@ -14,10 +14,11 @@ namespace BewerbungsTool.ViewModel
             });
 
             LebenslaufStatsListViewModel = LebenslaufStatListViewModel.Instance;
-            LebenslaufPersonenInfoViewModel = new();
+            LebenslaufPersonenInfoViewModel = LebenslaufPersonenInfoViewModel.Instance;
 
             TestViewModel = LebenslaufKontaktListViewModel.Instance;
-            testModel = new LebenslaufBerufserfahrungItemViewModel("Demo", "08/2022 - heute", "EGS Konstanz", "Aufgabenbereich: ", ".Net Entwickler mit den schwerpunkten auf Desktop Client Anwendungen (WPF) und .Net-MAUI für Android Apps");
+            TestVM = LebenslaufBerufserfahrungListViewModel.Instance;
+            testModel = LebenslaufBildungsListViewModel.Instance;
 
         }
         private static ÜbersichtsViewModel _instance;
@@ -30,7 +31,9 @@ namespace BewerbungsTool.ViewModel
 
         public DelegateCommand TestLatexCommand { get; set; }
 
-        public LebenslaufBerufserfahrungItemViewModel testModel { get; set; }
+        public LebenslaufBildungsListViewModel testModel { get; set; }
+
+        public LebenslaufBerufserfahrungListViewModel TestVM { get; set; }
 
 
         public LebenslaufKontaktListViewModel TestViewModel { get; set; }

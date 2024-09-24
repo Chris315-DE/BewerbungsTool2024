@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="BewerbungsTool.Controlls.LebenslaufBildungsList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BewerbungsTool.Controlls"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="400">
+    <Grid d:Background="White">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="2">
+            <Button Style="{StaticResource CkButton}" Command="{Binding AddCommand}" Content="+"  Width="40" Margin="2,10" Background="{StaticResource BackgroundBrush}" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Height="40" />
+            <Button Style="{StaticResource CkButton}" Content="-" Command="{Binding DelCommand}"  Width="40" Margin="2,10" Background="{StaticResource BackgroundBrush}" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Height="40"/>
+        </StackPanel>
+
+        <TextBox Grid.Row="0" Style="{StaticResource TextBoxPlaxeholder}" Tag="Datum MM/YYYY - MM/YYYY" Background="{StaticResource BrushBackroundLigth}" Text="{Binding Datum}"/>
+        <TextBox Grid.Row="1" Grid.Column="0" Style="{StaticResource TextBoxPlaxeholder}" Text="{Binding Was}" Tag="Wirtschaftsinformatik" Background="LightGray" />
+        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource TextBoxPlaxeholder}" Text="{Binding Wo}" Tag="Universität Regensburg" Background="LightGray" />
+        <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource TextBoxPlaxeholder}" Text="{Binding Beschreibung}" Tag="Beschreibung" AcceptsReturn="True" Height="90" Background="{StaticResource BrushBackroundLigth}" />
+
+        <ScrollViewer Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3">
+            <ItemsControl ItemsSource="{Binding Items}">
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <local:LebenslaufBildungsItem/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                
+            </ItemsControl>
+        </ScrollViewer>
+
+    </Grid>
+</UserControl>

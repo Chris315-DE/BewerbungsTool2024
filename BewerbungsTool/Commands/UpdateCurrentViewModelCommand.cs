@@ -46,7 +46,9 @@ namespace BewerbungsTool.Commands
                     case ViewEnums.ÜbersichtView:
                         _Navigator.CurrentViewModel = ÜbersichtsViewModel.Instance;
                         break;
-
+                    case ViewEnums.Lebenslauf:
+                        _Navigator.CurrentViewModel= LebenslaufViewModel.Instance;
+                        break ;
                     default:
                         Debugger.Break();
                         break;

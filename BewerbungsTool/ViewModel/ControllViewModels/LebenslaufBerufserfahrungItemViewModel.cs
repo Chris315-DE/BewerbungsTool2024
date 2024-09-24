@@ -115,14 +115,7 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
             SelectCommand = new DelegateCommand(o =>
             {
                 _dataStore.OnSelectedLebenslaufBerufItemChanged(this);
-                if (IsSelected)
-                {
-                    IsSelected = false;
-                }
-                else
-                {
-                    IsSelected = true;
-                }
+              
             });
 
         }

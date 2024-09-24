@@ -11,6 +11,7 @@ namespace BewerbungsTool.Enums
         BriefKopfView,
         AnschreibenView,
         ÜbersichtView,
+        Lebenslauf
     }
 
 
@@ -20,6 +21,16 @@ namespace BewerbungsTool.Enums
         Herr,
         Damen_Und_Herren
     }
+
+    public enum LebenslaufView
+    {
+        Berufserfahrung,
+        Bildung,
+        Kontakt,
+        PersonenInfo,
+        Stats
+    }
+
 
 
 }

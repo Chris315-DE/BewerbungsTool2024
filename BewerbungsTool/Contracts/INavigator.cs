@@ -13,6 +13,8 @@ namespace BewerbungsTool.Contracts
         BaseViewModel CurrentViewModel { get; set; }
         ICommand UpdateCurrentViewModel { get; }
 
+        BaseViewModel LebenslaufUnterViewModel { get; set; }
+
         static INavigator Instance { get; }
     }
 }

@@ -1,0 +1,64 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="BewerbungsTool.Controlls"
+    xmlns:CC="clr-namespace:BewerbungsTool.Controlls.CustomComps"
+    xmlns:conv="clr-namespace:BewerbungsTool.Converters">
+
+
+    <Style TargetType="{x:Type CC:StatusAnzeige}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CC:StatusAnzeige}">
+
+                    <ControlTemplate.Resources>
+                        <conv:BoolListToColorConv x:Key="cc"/>
+                        <conv:HeigtConv x:Key="hcon" />
+                        <conv:BooltoProgressConv x:Key="procon" />
+                    </ControlTemplate.Resources>
+
+
+                    <Border Background="{TemplateBinding Background}" CornerRadius="10">
+
+
+                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Height="{TemplateBinding Height,Converter={StaticResource hcon},ConverterParameter=5}">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <ProgressBar Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Background="Transparent" Value="{TemplateBinding DoneList, Converter={StaticResource procon}}"/>
+                            <TextBlock HorizontalAlignment="Center" x:Name="PART_Text" Grid.Row="0" Grid.Column="0" FontSize="18" Grid.ColumnSpan="6" Text="Lebenslauf Status"/>
+
+
+                            <Rectangle Grid.Row="1" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" x:Name="PART_Erfahrung"   Fill="{TemplateBinding DoneList,Converter={StaticResource cc},ConverterParameter=0}" Grid.Column="0" />
+                            <Rectangle Grid.Row="1" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" x:Name="PART_Bildung"     Fill="{TemplateBinding DoneList,Converter={StaticResource cc},ConverterParameter=1}" Grid.Column="1"/>
+                            <Rectangle Grid.Row="1" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" x:Name="PART_Kontakt"    Fill="{TemplateBinding DoneList,Converter={StaticResource cc},ConverterParameter=2}"  Grid.Column="2"/>
+                            <Rectangle Grid.Row="1" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" x:Name="PART_Person"     Fill="{TemplateBinding DoneList,Converter={StaticResource cc},ConverterParameter=3}"  Grid.Column="3"/>
+                            <Rectangle Grid.Row="1" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" x:Name="PART_Stat"        Fill="{TemplateBinding DoneList,Converter={StaticResource cc},ConverterParameter=4}" Grid.Column="4"/>
+                            <TextBlock Text="{TemplateBinding FieldOne}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
+                            <TextBlock Text="{TemplateBinding FieldTow}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"/>
+                            <TextBlock Text="{TemplateBinding FieldThree}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2"/>
+                            <TextBlock Text="{TemplateBinding FieldFour}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="3"/>
+                            <TextBlock Text="{TemplateBinding FieldFive}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="4"/>
+
+
+
+
+                        </Grid>
+
+                    </Border>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
