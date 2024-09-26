@@ -30,8 +30,28 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
             {
                 var toadd = new LebenslaufBerufserfahrungItemViewModel(Tätigkeit, VonBis, Arbeitgeber, ART, Beschreibung);
                 Items.Add(toadd);
+                if (Items.Count > 0)
+                {
+                    _store.OnLebenslaufUnterItemChanged(this,true);
+                }
             });
-            RemoveCommand = new DelegateCommand(o => { });
+            RemoveCommand = new DelegateCommand(o => 
+            {
+                if (Items.Count > 0 && SelectedItem != null)
+                {
+                    Items.Remove(SelectedItem);
+                    if(Items.Count > 0)
+                    {
+                        SelectedItem = Items[0];
+                        Items[0].IsSelected = true;
+                    }
+                    if(Items.Count == 0)
+                    {
+                        _store.OnLebenslaufUnterItemChanged(this,false);
+                    }
+                        
+                }
+            });
         }
 
         private LebenslaufBerufserfahrungItemViewModel _selectedItem;
@@ -48,6 +68,7 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
                 item.IsSelected = false;
             }
             Items[index].IsSelected = true;
+            SelectedItem = Items[index];
 
         }
 
@@ -66,6 +87,7 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
                 if (_items != value)
                 {
                     _items = value;
+                   
                     RaisPropertyChanged();
                 }
             }

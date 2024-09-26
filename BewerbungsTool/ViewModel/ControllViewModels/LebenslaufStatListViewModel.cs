@@ -67,12 +67,21 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
                 LebenslaufStatList.Insert(0, add);
                 manageSelectedItem(add);
                 RemoveItemCommand?.RaiseCanExecuteChanged();
+                _datastore.OnLebenslaufUnterItemChanged(this, true);
+
+
             });
 
             RemoveItemCommand = new DelegateCommand(o => LebenslaufStatList.Count > 0, o =>
             {
                 DelSelectedItem(SelectedItem);
+                if (LebenslaufStatList.Count == 0)
+                {
+                    _datastore.OnLebenslaufUnterItemChanged(this, false);
+                }
                 RemoveItemCommand?.RaiseCanExecuteChanged();
+
+
             });
 
             SliderValue = "1";

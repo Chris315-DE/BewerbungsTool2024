@@ -11,7 +11,7 @@ namespace BewerbungsTool.MvvmBasics
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-
+        public event Action<BaseViewModel>? IsReady;
 
 
         protected virtual void RaisPropertyChanged([CallerMemberName] string propertyName = "")
@@ -33,6 +33,12 @@ namespace BewerbungsTool.MvvmBasics
                 MinimumWidth = 1600;
                 MinimumHeight = 900;
             }
+        }
+
+        public void RaisIsReady(BaseViewModel model)
+        {
+            IsReady?.Invoke(model);
+                
         }
 
 

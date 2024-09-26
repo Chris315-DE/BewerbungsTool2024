@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +26,7 @@ namespace BewerbungsTool.Controlls.CustomComps
 
 
         public static DependencyProperty DoneListProperty =
-            DependencyProperty.Register("DoneList", typeof(List<bool>), typeof(StatusAnzeige), new PropertyMetadata(new List<bool> { true, true, false, false, true }));
+            DependencyProperty.Register("DoneList", typeof(ObservableCollection<bool>), typeof(StatusAnzeige), new PropertyMetadata(new ObservableCollection<bool> { true, true, false, false, true }));
 
         public static DependencyProperty FieldOneProperty =
             DependencyProperty.Register("FieldOne", typeof(string), typeof(StatusAnzeige), new PropertyMetadata(string.Empty));
@@ -74,9 +75,9 @@ namespace BewerbungsTool.Controlls.CustomComps
             set => SetValue(FieldOneProperty, value);
         }
 
-        public List<bool> DoneList
+        public ObservableCollection<bool> DoneList
         {
-            get => (List<bool>)GetValue(DoneListProperty);
+            get => (ObservableCollection<bool>)GetValue(DoneListProperty);
             set => SetValue(DoneListProperty, value);
         }
 

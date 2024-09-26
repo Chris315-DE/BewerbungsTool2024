@@ -113,6 +113,9 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
                 Items.Add(new LebenslaufKontaktItemViewModel(SelectedIcon, Beschreibung));
                 SelectedIcon = String.Empty;
                 Beschreibung = String.Empty;
+                dataStore.OnLebenslaufUnterItemChanged(this, true);
+
+
 
             });
 
@@ -127,6 +130,7 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
                 else
                 {
                     SelectedItem = null;
+                    dataStore.OnLebenslaufUnterItemChanged(this, false);
                 }
             });
             

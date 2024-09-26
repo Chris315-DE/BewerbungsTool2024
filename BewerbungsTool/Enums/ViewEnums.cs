@@ -28,7 +28,8 @@ namespace BewerbungsTool.Enums
         Bildung,
         Kontakt,
         PersonenInfo,
-        Stats
+        Stats,
+        Projekt
     }
 
 

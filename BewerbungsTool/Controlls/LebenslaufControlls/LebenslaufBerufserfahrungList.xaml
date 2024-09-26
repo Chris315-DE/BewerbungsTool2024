@@ -23,7 +23,7 @@
         <TextBox Style="{StaticResource TextBoxPlaxeholder}" Text="{Binding Tätigkeit}"  Background="{StaticResource BrushBackroundLigth}" Tag="Tätigkeit" Height="40" FontSize="10" Margin="5,8,5,2" />
         <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
             <Button Style="{StaticResource CkButton}" Command="{Binding AddCommand}" Content="+" Margin="5" Background="{StaticResource BackgroundBrush}" Width="50" HorizontalAlignment="Left"/>
-            <Button Style="{StaticResource CkButton}" Content="-" Margin="5" Background="{StaticResource BackgroundBrush}" Width="50" HorizontalAlignment="Left"/>
+            <Button Style="{StaticResource CkButton}" Command="{Binding RemoveCommand}" Content="-" Margin="5" Background="{StaticResource BackgroundBrush}" Width="50" HorizontalAlignment="Left"/>
         </StackPanel>
         
         <TextBox Style="{StaticResource TextBoxPlaxeholder}" Background="LightGray" Grid.Row="1" Grid.Column="1" Height="40" FontSize="10" Text="{Binding VonBis}" Tag="MM/YYYY - MM/YYYY"/>

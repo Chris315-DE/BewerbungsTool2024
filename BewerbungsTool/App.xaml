@@ -54,7 +54,11 @@
             <DataTemplate DataType="{x:Type vm:LebenslaufViewModel}">
                 <con:LebenslaufView/>
             </DataTemplate>
-            
+
+
+            <DataTemplate DataType="{x:Type vmleb:LebenslaufProjektListViewModel}">
+                <con:LebenslaufProjektList/>
+            </DataTemplate>
 
         </ResourceDictionary>
 

@@ -64,6 +64,7 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
                 Was = string.Empty;
                 Wo = string.Empty;
                 Beschreibung = string.Empty;
+                _data.OnLebenslaufUnterItemChanged(this,true);
 
                 DelCommand?.RaiseCanExecuteChanged();
             });
@@ -77,6 +78,11 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
                     Items[0].IsSelected = true;
                 }
                 DelCommand?.RaiseCanExecuteChanged();
+
+                if(Items.Count == 0)
+                {
+                    _data.OnLebenslaufUnterItemChanged(this,false);
+                }
 
             });
 

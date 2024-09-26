@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -35,7 +36,7 @@ namespace BewerbungsTool.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
 
-            List<bool> list = (List<bool>)value;
+            ObservableCollection<bool> list = (ObservableCollection<bool>)value;
             int index = int.Parse(parameter.ToString());
 
             if (list?.Count == 5 && list?[index] == true)
@@ -55,7 +56,7 @@ namespace BewerbungsTool.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            List<bool> bools = (List<bool>)value;
+            ObservableCollection<bool> bools = (ObservableCollection<bool>)value;
             int progress = 0;
 
             foreach (var item in bools)

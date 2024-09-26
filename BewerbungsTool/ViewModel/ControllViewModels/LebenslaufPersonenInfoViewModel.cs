@@ -1,4 +1,5 @@
-﻿using BewerbungsTool.MvvmBasics;
+﻿using BewerbungsTool.DataStore;
+using BewerbungsTool.MvvmBasics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +10,14 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
 {
     public class LebenslaufPersonenInfoViewModel : BaseViewModel
     {
-
+        private LebenslaufDataStore _store;
         private static LebenslaufPersonenInfoViewModel _instance;
 
-        public static LebenslaufPersonenInfoViewModel Instance => _instance?? (_instance = new LebenslaufPersonenInfoViewModel());
+        public static LebenslaufPersonenInfoViewModel Instance => _instance ?? (_instance = new LebenslaufPersonenInfoViewModel());
 
         private LebenslaufPersonenInfoViewModel()
         {
-
+            _store = LebenslaufDataStore.Instance;
         }
 
         private string _Name;
@@ -34,6 +35,7 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
                 {
                     _Name = value;
                     RaisPropertyChanged();
+                    IsValid();
                 }
             }
         }
@@ -45,6 +47,7 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
                 {
                     _Beruf = value;
                     RaisPropertyChanged();
+                    IsValid();
                 }
             }
         }
@@ -56,6 +59,7 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
                 {
                     _GeburtsDaten = value;
                     RaisPropertyChanged();
+                    IsValid();
                 }
             }
         }
@@ -67,6 +71,7 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
                 {
                     _Nationalität = value;
                     RaisPropertyChanged();
+                    IsValid();
                 }
             }
         }
@@ -78,9 +83,26 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
                 {
                     _Familienstand = value;
                     RaisPropertyChanged();
+                    IsValid();
                 }
             }
         }
+
+
+        void IsValid()
+        {
+            if (!string.IsNullOrEmpty(_Name) && !string.IsNullOrEmpty(Beruf) && !string.IsNullOrEmpty(GeburtsDaten) &&
+                !string.IsNullOrEmpty(Nationalität) && !string.IsNullOrEmpty(Familienstand))
+            {
+                _store.OnLebenslaufUnterItemChanged(this, true);
+            }
+            else
+            {
+                _store.OnLebenslaufUnterItemChanged(this, false);
+            }
+
+        }
+
 
     }
 }
