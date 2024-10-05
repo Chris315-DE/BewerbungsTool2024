@@ -15,6 +15,8 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
 
         public static LebenslaufPersonenInfoViewModel Instance => _instance ?? (_instance = new LebenslaufPersonenInfoViewModel());
 
+
+
         private LebenslaufPersonenInfoViewModel()
         {
             _store = LebenslaufDataStore.Instance;
@@ -103,6 +105,27 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
 
         }
 
+        internal void SetInstance(LebenslaufPersonenInfoViewModel? personenInfo)
+        {
 
+            if (personenInfo is null)
+            {
+                Familienstand = string.Empty;
+                Name = string.Empty;
+                Beruf = string.Empty;
+                GeburtsDaten = string.Empty;
+                Nationalität = string.Empty;
+            }
+            else
+            {
+                Familienstand = personenInfo.Familienstand;
+                Nationalität = personenInfo.Nationalität;
+                GeburtsDaten = personenInfo.GeburtsDaten;
+                Beruf = personenInfo.Beruf;
+                Name = personenInfo.Name;
+            }
+        }
     }
 }
+
+

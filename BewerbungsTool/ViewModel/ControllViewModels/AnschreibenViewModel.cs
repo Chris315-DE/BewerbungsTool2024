@@ -15,7 +15,7 @@ namespace BewerbungsTool.ViewModel
             TemplateisSelected = false;
 
 
-            TemplateManager.Instance.GeladeneTemplates.ForEach(template => { BewerbungsTemplate.Add(template); });
+            AnschreibenTemplateManager.Instance.GeladeneTemplates.ForEach(template => { BewerbungsTemplate.Add(template); });
 
 
 
@@ -49,9 +49,9 @@ namespace BewerbungsTool.ViewModel
                 TemplateisSelected = false;
                 BewerbungsTemplate.Clear();
 
-                TemplateManager.Instance.Löschetemplate(todel);
+                AnschreibenTemplateManager.Instance.Löschetemplate(todel);
 
-                TemplateManager.Instance.GeladeneTemplates.ForEach(template =>
+                AnschreibenTemplateManager.Instance.GeladeneTemplates.ForEach(template =>
                 {
                     BewerbungsTemplate.Add(template);
 

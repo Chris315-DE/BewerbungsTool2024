@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
 using System.IO;
-using System.Diagnostics;
-using System.Web;
 
 namespace BewerbungsTool.Manager
 {
@@ -39,7 +32,7 @@ namespace BewerbungsTool.Manager
 
             name = name + ".json";
             var filesavepath = Path.Combine(_SpeicherOrt, name);
-            string json = JsonConvert.SerializeObject(_speicherobject);
+            string json = JsonConvert.SerializeObject(_speicherobject,Formatting.Indented);
 
             File.WriteAllText(filesavepath, json);
 

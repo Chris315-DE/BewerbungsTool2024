@@ -100,6 +100,21 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
             }
         }
 
+        /// <summary>
+        /// Dieser Constructor darf nur durch <see cref="JsonConvert.DeserializeObject{T}(string, JsonSerializerSettings?)"/> 
+        /// verwendet werden!
+        /// </summary>
+        private LebenslaufBerufserfahrungItemViewModel()
+        {
+            _dataStore = LebenslaufDataStore.Instance;
+
+            SelectCommand = new DelegateCommand(o =>
+            {
+                _dataStore.OnSelectedLebenslaufBerufItemChanged(this);
+
+            });
+        }
+
 
         public LebenslaufBerufserfahrungItemViewModel(string beruf, string vonBis,
             string arbeitgeber, string art, string kurzbeschreibung)

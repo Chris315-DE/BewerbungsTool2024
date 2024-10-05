@@ -14,7 +14,7 @@
         <RadioButton Style="{StaticResource NavButton}" Command="{Binding NaviCommand}" CommandParameter="{x:Static enum:LebenslaufView.Kontakt}" Content="Kontakt" Margin="0,0,0,5"/>
         <RadioButton Style="{StaticResource NavButton}" Command="{Binding NaviCommand}" CommandParameter="{x:Static enum:LebenslaufView.PersonenInfo}" Content="PersonenInfo" Margin="0,0,0,5"/>
         <RadioButton Style="{StaticResource NavButton}" Command="{Binding NaviCommand}" CommandParameter="{x:Static enum:LebenslaufView.Stats}" Content="Stats" Margin="0,0,0,5"/>
-        <RadioButton Style="{StaticResource NavButton}" Command="{Binding NaviCommand}" CommandParameter="{x:Static enum:LebenslaufView.Projekt}" Content="Projekt" Margin="0,0,0,5"/>
+        <RadioButton Style="{StaticResource NavButton}" Command="{Binding NaviCommand}" CommandParameter="{x:Static enum:LebenslaufView.Projekt}" Content="Projekt (Optional)" Margin="0,0,0,5"/>
 
     </StackPanel>
 

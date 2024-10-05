@@ -3,6 +3,7 @@ using BewerbungsTool.MvvmBasics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Documents;
@@ -31,6 +32,22 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
                 dataStore.OnSelectedLebenslaufStatItemChanged(this);
             });
 
+
+        }
+
+
+        /// <summary>
+        /// Dieser Constructor darf nur durch <see cref="JsonConvert.DeserializeObject{T}(string, JsonSerializerSettings?)"/> 
+        /// verwendet werden!
+        /// </summary>
+        private LebenslaufStatsItemViewModel()
+        {
+            dataStore = LebenslaufDataStore.Instance;
+
+            IsSelectedCommand = new DelegateCommand(o =>
+            {
+                dataStore.OnSelectedLebenslaufStatItemChanged(this);
+            });
 
         }
 

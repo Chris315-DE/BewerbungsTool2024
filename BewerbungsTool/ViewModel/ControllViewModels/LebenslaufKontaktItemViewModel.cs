@@ -69,6 +69,15 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
 
         }
 
+        /// <summary>
+        /// Dieser Constructor darf nur durch <see cref="JsonConvert.DeserializeObject{T}(string, JsonSerializerSettings?)"/> 
+        /// verwendet werden!
+        /// </summary>
+        private LebenslaufKontaktItemViewModel()
+        {
+            dataStore = LebenslaufDataStore.Instance;
+            IsSelectedCommand = new DelegateCommand(o => { dataStore.OnSelectedLebenslaufKontaktItemChanged(this); });
+        }
 
 
     }

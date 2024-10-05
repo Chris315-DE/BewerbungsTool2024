@@ -43,8 +43,33 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
         }
 
 
+        private bool _isSelected;
 
+        public bool IsSelected
+        {
+            get => _isSelected;
+            set
+            {
+                if (value != _isSelected)
+                {
+                    _isSelected = value;
+                    RaisPropertyChanged();
+                }
+            }
+        }
 
+        /// <summary>
+        /// Dieser Constructor darf nur durch <see cref="JsonConvert.DeserializeObject{T}(string, JsonSerializerSettings?)"/> 
+        /// verwendet werden!
+        /// </summary>
+        private LebenslaufProjektItemViewModel()
+        {
+            _store = LebenslaufDataStore.Instance;
+            SelectedCommand = new DelegateCommand(o =>
+            {
+                _store.OnLebenslaufProjektItemChanged(this);
+            });
+        }
 
 
         public LebenslaufProjektItemViewModel(string projektName, string beschreibung)

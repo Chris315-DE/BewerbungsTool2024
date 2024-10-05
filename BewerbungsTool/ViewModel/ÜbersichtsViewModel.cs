@@ -1,4 +1,5 @@
 ﻿using BewerbungsTool.LatexService;
+using BewerbungsTool.Manager;
 using BewerbungsTool.MvvmBasics;
 using BewerbungsTool.ViewModel.ControllViewModels;
 
@@ -8,36 +9,38 @@ namespace BewerbungsTool.ViewModel
     {
         private ÜbersichtsViewModel()
         {
-            TestLatexCommand = new(o =>
+            TestCVCommand = new(o =>
             {
-                CoverLetterCreator creator = new CoverLetterCreator(AnschreibenViewModel.Instance.SelectedTemplate);
+
+
+                LebenslaufTemplate lebenslaufTemplate = new LebenslaufTemplate();
+                string tempname = LebenslaufViewModel.Instance.SelectedTemplate;
+                foreach (var item in LebenslaufViewModel.Instance.LebenslaufTemplate)
+                {
+                    if (tempname == item.Name)
+                    {
+                        lebenslaufTemplate = item;
+                        break;
+                    }
+
+                }
+                CVCreator creator = new CVCreator(lebenslaufTemplate);
+
             });
 
-            LebenslaufStatsListViewModel = LebenslaufStatListViewModel.Instance;
-            LebenslaufPersonenInfoViewModel = LebenslaufPersonenInfoViewModel.Instance;
 
-            TestViewModel = LebenslaufKontaktListViewModel.Instance;
-            TestVM = LebenslaufBerufserfahrungListViewModel.Instance;
-            testModel = LebenslaufBildungsListViewModel.Instance;
+          
 
         }
         private static ÜbersichtsViewModel _instance;
 
         public static ÜbersichtsViewModel Instance => (_instance ?? new ÜbersichtsViewModel());
 
-        public LebenslaufStatListViewModel LebenslaufStatsListViewModel { get; set; }
+      
 
-        public LebenslaufPersonenInfoViewModel LebenslaufPersonenInfoViewModel { get; set; }
+        public DelegateCommand TestCVCommand { get; set; }
 
-        public DelegateCommand TestLatexCommand { get; set; }
-
-        public LebenslaufBildungsListViewModel testModel { get; set; }
-
-        public LebenslaufBerufserfahrungListViewModel TestVM { get; set; }
-
-
-        public LebenslaufKontaktListViewModel TestViewModel { get; set; }
-
+      
     }
 
 

@@ -52,7 +52,7 @@ namespace BewerbungsTool.ViewModel
 
         public GridLength TitelHeightGrid => new GridLength(TitleHeight + ResizeBorder);
 
-        public double WindowMinimumWidth { get; set; } = 1000;
+        public double WindowMinimumWidth { get; set; } = 1200;
         public double WindowMinimumHeight { get; set; } = 700;
 
         #endregion

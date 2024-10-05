@@ -13,43 +13,18 @@
 
     <Grid d:Background="White">
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/> 
-            <RowDefinition Height="auto"/> 
-            <RowDefinition Height="*"/>
-           
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-        <local:LebenslaufPersonenInfo DataContext="{Binding LebenslaufPersonenInfoViewModel}"/>
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <local:LebenslaufKontaktList  DataContext="{Binding TestViewModel}" Grid.Column="1"/>
-                
-            </Grid>
-          
-        </Grid>
+        <Button Height="40" Width="100" Style="{StaticResource CkButton}" Content="TestCV" Command="{Binding TestCVCommand}" Background="{StaticResource GUIForgroundMidBrush}"/>
 
-        <!--<Button Content="TestLatex" Command="{Binding TestLatexCommand}" />-->
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-
-            <local:LebenslaufBildungsList DataContext="{Binding testModel}"/>
-
-
-
-        </Grid>
-        <local:LebenslaufStatList Grid.Row="2" DataContext="{Binding LebenslaufStatsListViewModel}"/>
 
     </Grid>
 

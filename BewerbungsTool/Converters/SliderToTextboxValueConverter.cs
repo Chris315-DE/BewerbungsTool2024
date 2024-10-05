@@ -14,27 +14,27 @@ namespace BewerbungsTool.Converters
             switch (inputValue)
             {
                 case "1":
-                    return "Garnicht";
+                    return "Anfänger";
                 case "2":
-                    return "Sehr schlecht";
+                    return "Anfänger+";
                 case "3":
-                    return "schlecht";
+                    return "Grundkenntnisse";
                 case "4":
-                    return "Naja";
+                    return "Fortgeschritten";
                 case "5":
-                    return "OK";
+                    return "Kompetent";
                 case "6":
-                    return "Es geht";
+                    return "Geübt";
                 case "7":
-                    return "Kann ich";
+                    return "Erfahren";
                 case "8":
-                    return "Kann ich gut";
+                    return "Versiert";
                 case "9":
-                    return "Kann ich sehr gut";
-                case "10":
                     return "Profi";
+                case "10":
+                    return "Experte";
                 default:
-                    return "NV";
+                    return "Unwissend";
 
             }
 

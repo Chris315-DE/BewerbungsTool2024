@@ -22,7 +22,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Style="{StaticResource HeaderText}" Text="{Binding ProjektName,FallbackValue=Test}" FontSize="30" />
+        <TextBlock Grid.Row="0" Style="{StaticResource HeaderText}" Foreground="Gray" Text="{Binding ProjektName,FallbackValue=Test}" FontSize="30" />
         <TextBlock Grid.Row="1" Text="{Binding Beschreibung,FallbackValue=Exploring new Literature}" FontSize="25" />
     </Grid>
 </UserControl>

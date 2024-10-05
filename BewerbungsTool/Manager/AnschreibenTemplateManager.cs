@@ -1,22 +1,16 @@
 ﻿using BewerbungsTool.Model;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BewerbungsTool.Manager
 {
-    public class TemplateManager
+    public class AnschreibenTemplateManager
     {
         private string _Folder;
 
         public List<AnschreibenTemplate> GeladeneTemplates { get; private set; }
 
-        private TemplateManager()
+        private AnschreibenTemplateManager()
         {
             _Folder = Path.Combine(AppContext.BaseDirectory, typeof(AnschreibenTemplate).Name);
 
@@ -51,31 +45,14 @@ namespace BewerbungsTool.Manager
 
         }
 
-
-
-        public void Löschetemplate(string template)
+        internal void Löschetemplate(string todel)
         {
-
-            GeladeneTemplates = [];
-            string debug = template + ".json";
-            debug = Path.Combine(_Folder, debug);
-            if(File.Exists(Path.Combine(_Folder, template+".json")))
-            {
-               File.Delete(debug);
-
-            }
-
-            LadeTemplates(); 
-               
-
-
+            throw new NotImplementedException();
         }
 
+        private static AnschreibenTemplateManager _instance;
 
-
-        private static TemplateManager _instance;
-
-        public static TemplateManager Instance => _instance ?? (_instance = new TemplateManager());
+        public static AnschreibenTemplateManager Instance => _instance ?? (_instance = new AnschreibenTemplateManager());
 
 
 
