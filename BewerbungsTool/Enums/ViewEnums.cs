@@ -29,7 +29,9 @@ namespace BewerbungsTool.Enums
         Kontakt,
         PersonenInfo,
         Stats,
-        Projekt
+        Hobbys,
+        Projekt,
+        Biographie
     }
 
 

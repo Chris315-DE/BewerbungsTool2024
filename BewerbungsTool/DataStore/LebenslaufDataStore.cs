@@ -25,7 +25,15 @@ namespace BewerbungsTool.DataStore
         public event Action<LebenslaufProjektItemViewModel> LebenslaufProjektItemChanged;
 
         public event Action<BaseViewModel,bool> LebenslaufUnderItemIsChanged;
-      
+
+        public event Action<LebenslaufHobbyItemViewModel> LebenslaufHobbyItemChanged;
+
+
+        public void OnLebenslaufHobbyChanged(LebenslaufHobbyItemViewModel viewModel)
+        {
+            LebenslaufHobbyItemChanged?.Invoke(viewModel);
+        }
+
 
 
         public void OnLebenslaufProjektItemChanged(LebenslaufProjektItemViewModel model)

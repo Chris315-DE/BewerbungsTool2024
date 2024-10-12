@@ -12,7 +12,7 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
         private string _TagValue;
         private string _Beschreibung;
         private LebenslaufKontaktItemViewModel _selectedItem;
-
+        private int index;
 
         #endregion
 
@@ -94,7 +94,7 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
 
         public DelegateCommand AddItemCommand { get; set; }
 
-        public DelegateCommand RemoveItemCommand { get; set; } 
+        public DelegateCommand RemoveItemCommand { get; set; }
         #endregion
 
         #region Ctor
@@ -110,16 +110,17 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
 
             AddItemCommand = new DelegateCommand(o => isValid(), o =>
             {
-                Items.Add(new LebenslaufKontaktItemViewModel(SelectedIcon, Beschreibung));
+                Items.Add(new LebenslaufKontaktItemViewModel(SelectedIcon, Beschreibung,index));
                 SelectedIcon = String.Empty;
                 Beschreibung = String.Empty;
+                
                 dataStore.OnLebenslaufUnterItemChanged(this, true);
 
 
 
             });
 
-            RemoveItemCommand = new DelegateCommand(o => SelectedItem != null, o => 
+            RemoveItemCommand = new DelegateCommand(o => SelectedItem != null, o =>
             {
                 Items.Remove(SelectedItem);
                 if (Items.Count > 0)
@@ -133,7 +134,7 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
                     dataStore.OnLebenslaufUnterItemChanged(this, false);
                 }
             });
-            
+
 
         }
 
@@ -165,33 +166,41 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
                 //GitHub
                 case "\uf09b":
                     TagValue = "GitHub Url:";
+                    index = 0;
                     break;
                 //Mail
                 case "\uf0e0":
                     TagValue = "Mail Adresse:";
+                    index = 1;
                     break;
                 //Phone
                 case "\uf10b":
                     TagValue = "PhoneNumber:";
+                    index = 2;
                     break;
                 //Xing
                 case "\uf168":
                     TagValue = "Xing Url:";
+                    index = 3;
                     break;
                 //Linkedin
                 case "\uf0e1":
                     TagValue = "Linkedin Url:";
+                    index = 4;
                     break;
                 //Homepage
                 case "\uf015":
                     TagValue = "Hompage Url:";
+                    index = 5;
                     break;
                 //Map-Marker
                 case "\uf041":
                     TagValue = "Straße\nPLZ und Stadt";
+                    index = 6;
                     break;
                 default:
                     TagValue = "NV";
+                    index = 7;
                     break;
             }
 

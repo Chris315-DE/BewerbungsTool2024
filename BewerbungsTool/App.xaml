@@ -60,6 +60,16 @@
                 <con:LebenslaufProjektList/>
             </DataTemplate>
 
+
+            <DataTemplate DataType="{x:Type vmleb:LebenslaufHobbyListViewModel}">
+                <con:LebenslaufHobbyListControl/>
+            </DataTemplate>
+
+
+            <DataTemplate DataType="{x:Type vmleb:LebenslaufBiographieViewModel}">
+                <con:LebenslaufBiographie/>
+            </DataTemplate>
+            
         </ResourceDictionary>
 
 

@@ -26,22 +26,45 @@ namespace BewerbungsTool.Controlls.CustomComps
 
 
         public static DependencyProperty DoneListProperty =
-            DependencyProperty.Register("DoneList", typeof(ObservableCollection<bool>), typeof(StatusAnzeige), new PropertyMetadata(new ObservableCollection<bool> { true, true, false, false, true }));
+            DependencyProperty.Register(nameof(DoneList), typeof(ObservableCollection<bool>), typeof(StatusAnzeige), new PropertyMetadata(new ObservableCollection<bool> { true, true, false, false, true,false,false }));
 
         public static DependencyProperty FieldOneProperty =
-            DependencyProperty.Register("FieldOne", typeof(string), typeof(StatusAnzeige), new PropertyMetadata(string.Empty));
+            DependencyProperty.Register(nameof(FieldOne), typeof(string), typeof(StatusAnzeige), new PropertyMetadata(string.Empty));
 
         public static DependencyProperty FieldTowProperty =
-            DependencyProperty.Register("FieldTow", typeof(string), typeof(StatusAnzeige), new PropertyMetadata(string.Empty));
+            DependencyProperty.Register(nameof(FieldTow), typeof(string), typeof(StatusAnzeige), new PropertyMetadata(string.Empty));
 
         public static DependencyProperty FieldThreeProperty =
-            DependencyProperty.Register("FieldThree", typeof(string), typeof(StatusAnzeige), new PropertyMetadata(string.Empty));
+            DependencyProperty.Register(nameof(FieldThree), typeof(string), typeof(StatusAnzeige), new PropertyMetadata(string.Empty));
 
         public static DependencyProperty FieldFourProperty =
-            DependencyProperty.Register("FieldFour", typeof(string), typeof(StatusAnzeige), new PropertyMetadata(string.Empty));
+            DependencyProperty.Register(nameof(FieldFour), typeof(string), typeof(StatusAnzeige), new PropertyMetadata(string.Empty));
 
         public static DependencyProperty FieldFiveProperty =
-            DependencyProperty.Register("FieldFive", typeof(string), typeof(StatusAnzeige), new PropertyMetadata(string.Empty));
+            DependencyProperty.Register(nameof(FieldFive), typeof(string), typeof(StatusAnzeige), new PropertyMetadata(string.Empty));
+
+        public static DependencyProperty FieldSixProperty =
+            DependencyProperty.Register(nameof(FieldSix),typeof(string), typeof(StatusAnzeige),new PropertyMetadata(string.Empty));
+
+        public static DependencyProperty FieldSevenProperty =
+            DependencyProperty.Register(nameof(FieldSeven), typeof(string), typeof(StatusAnzeige), new PropertyMetadata(string.Empty));
+
+
+
+        public string FieldSeven
+        {
+            get => (string)GetValue(FieldSevenProperty);
+            set => SetValue(FieldSevenProperty, value);
+        }
+
+
+        public string FieldSix
+        {
+            get => (string)GetValue(FieldSixProperty);
+            set => SetValue(FieldSixProperty, value);
+        }
+
+
 
         public string FieldFive
         {

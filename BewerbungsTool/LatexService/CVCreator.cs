@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.DirectoryServices.ActiveDirectory;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -39,12 +40,12 @@ namespace BewerbungsTool.LatexService
             WriteandSave();
         }
 
-        //fürs Testen der Leftcolumn 
-        private const string LATEX_TEST_END = @"\end{leftcolumn}
+        //fürs Testen der RightColum 
+        private const string LATEX_TEST_END = @"\end{rightcolumn}
 											\end{paracol}
 											\end{document}";
 
-        #region Tested
+        #region LeftCol
 
 
         //  \begin{leftcolumn}
@@ -481,8 +482,16 @@ namespace BewerbungsTool.LatexService
 
 \begin{leftcolumn}";
 
+        private const string LATEX_META_SKILLS_KOMMENTAR = @"%---------------------------------------------------------------------------------------
+%	META SKILLS
+%----------------------------------------------------------------------------------------";
 
+        private const string LATEX_META_BILDUNG_KOMMENTAR = @"%---------------------------------------------------------------------------------------
+%	EDUCATION
+%----------------------------------------------------------------------------------------";
 
+        private const string LATEX_END_LEFT_START_RIGHT = @"\end{leftcolumn}
+\begin{rightcolumn}";
 
         private string LTexMeta_Person()
         {
@@ -534,7 +543,22 @@ namespace BewerbungsTool.LatexService
         }
 
 
+        private string LTexMeta_Kontakt()
+        {
+            string ret = @"\cvsection{Kontakt}" + "\n";
+            string black = @"}{black}\\[6pt]" + "\n";
+            foreach (var item in Lebenslauf.Kontakt)
+            {
+             
+                string conv = convertUnicodeStringtoLTexFormat(item.Index, item.Content);
+                ret += conv;
+             
 
+            }
+
+
+            return ret;
+        }
 
         private string LTexMeta_Skills()
         {
@@ -602,17 +626,130 @@ namespace BewerbungsTool.LatexService
             => @"\cvskill{" + statname + @"} {" + value + "} {" + (float.Parse(score) / 10).ToString().Replace(',', '.') + @"} \\[-2pt]";
 
 
+   
+
+        private string LTexMeta_Bildung()
+        {
+            string cvsection = @"\newline" + "\n" + @"\cvsection{Bildung}" + "\n";
+            string Event = @"\cvmetaevent" + "\n";
+
+            string ret = cvsection;
+
+            foreach (var item in Lebenslauf.Bildung)
+            {
+                ret += Event;
+                ret += "{" + item.VonBis + "}\n";
+                ret += "{" + item.Was + "}\n";
+                ret += "{" + item.Wo + "}\n";
+                ret += @"{\textit{" + item.Beschreibung + "}}\n";
+            }
+
+            return ret;
+        }
+
+
+
+        private string LTexMeta_Projekte()
+        {
+            if (Lebenslauf.Projekt.Count == 0)
+                return string.Empty;
+            string cvsec = @"\cvsection{Projekte}" + "\n\n";
+            string ret = cvsec += @"\cvlist{" + "\n";
+            foreach (var item in Lebenslauf.Projekt)
+            {
+                ret += @"\item {\textbf{" + item.ProjektName + @"}}\\" + item.Beschreibung + "\n";
+            }
+            ret += "}\n";
+
+            return ret;
+        }
+
+        private string LTexMeta_Hobbys()
+        {
+            string cvsection = @"\cvsection{Interessen}" + "\n\n";
+            string ico = @"\icontext{CaretRight}{12}{";
+            string icoend = @"}{black}\\[6pt]" + "\n";
+            string ret = cvsection;
+            if (Lebenslauf?.Hobbys.Count > 0)
+            {
+
+                foreach (var item in Lebenslauf.Hobbys)
+                {
+                    ret += ico;
+                    ret += item.Text;
+                    ret += icoend;
+                }
+            }
+            return ret;
+        }
+
+
+
+        private string convertUnicodeStringtoLTexFormat(int index, string content)
+        {
+          
+            switch (index)
+            {
+                //GitHub
+                case 0:
+                    string splittet = string.Empty;
+                    if (content.Contains("www"))
+                    {
+                        splittet = content.Replace("https://www.github.com/", "");
+
+                    }
+                    else
+                    {
+                        splittet = content.Replace("https://github.com/", "");
+                    }
+
+
+                    return @"\iconhref{Github}{16}{" + splittet + @"}{" + content + @"}{black}\\[6pt]"+"\n";
+
+                //Mail
+                case 1:
+                    return @"\iconemail{Envelope}{16}{" + content + @"}{" + content+ @"}{black}\\[6pt]" + "\n";
+
+                //Phone
+                case 2:
+                    return @"\icontext{MobilePhone}{16}{" + content + @"}{black}\\[6pt]" + "\n";
+
+                //Xing
+                case 3:
+
+                     splittet = content.Replace("https://www.xing.com/", "");
+
+                    return @"\iconhref{Xing}{16}{" + splittet +  @"}{" + content + @"}{black}\\[6pt]" + "\n";
+
+                //Linkedin
+                case 4:
+                    splittet = content.Replace("https://www.linkedin.com/in/", "");
+                    return @"\iconhref{Linkedin}{16}{" + splittet + @"}{ "+ content +@"}{black}\\[6pt]" + "\n";
+
+                //Homepage
+                case 5:
+                    splittet = content.Replace("https://www.", "").Replace(".com","");
+                    return @"\iconhref{Home}{16}{" + splittet + @"}{" + content +@"}{black}\\[6pt]" + "\n";
+
+                //Map-Marker
+                case 6:
+                    return @"\icontext{MapMarker}{16}{" + content + @"}{black}\\[6pt]"+"\n";
+
+
+
+
+
+                default:
+                    return "NV";
+
+            }
+        }
         #endregion
-
-
-
-
-
-
         private void WriteandSave()
         {
-            File.WriteAllText(FilePath, LATEX_SETUP + LTexMeta_Person() + LTexMeta_Skills() + LATEX_TEST_END);
+            File.WriteAllText(FilePath, LATEX_SETUP + LTexMeta_Person() + LATEX_META_SKILLS_KOMMENTAR + "\n" + LTexMeta_Skills() + LATEX_META_BILDUNG_KOMMENTAR + "\n" + LTexMeta_Bildung() + LTexMeta_Projekte() + LTexMeta_Hobbys() + LTexMeta_Kontakt()+LATEX_END_LEFT_START_RIGHT + LATEX_TEST_END);
         }
+
 
 
 

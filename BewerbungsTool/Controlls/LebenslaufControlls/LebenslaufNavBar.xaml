@@ -10,11 +10,14 @@
              d:DesignHeight="450" d:DesignWidth="150">
     <StackPanel Orientation="Vertical">
         <RadioButton Style="{StaticResource NavButton}" Content="Berufserfahrung" Command="{Binding NaviCommand}" CommandParameter="{x:Static enum:LebenslaufView.Berufserfahrung}"  Margin="0,5,0,5"/>
+        <RadioButton Style="{StaticResource NavButton}" Command="{Binding NaviCommand}" CommandParameter="{x:Static enum:LebenslaufView.Biographie}" Content="Biografie" Margin="0,0,0,5"/>
         <RadioButton Style="{StaticResource NavButton}" Command="{Binding NaviCommand}" CommandParameter="{x:Static enum:LebenslaufView.Bildung}" Content="Bildung"  Margin="0,0,0,5"/>
         <RadioButton Style="{StaticResource NavButton}" Command="{Binding NaviCommand}" CommandParameter="{x:Static enum:LebenslaufView.Kontakt}" Content="Kontakt" Margin="0,0,0,5"/>
         <RadioButton Style="{StaticResource NavButton}" Command="{Binding NaviCommand}" CommandParameter="{x:Static enum:LebenslaufView.PersonenInfo}" Content="PersonenInfo" Margin="0,0,0,5"/>
         <RadioButton Style="{StaticResource NavButton}" Command="{Binding NaviCommand}" CommandParameter="{x:Static enum:LebenslaufView.Stats}" Content="Stats" Margin="0,0,0,5"/>
+        <RadioButton Style="{StaticResource NavButton}" Command="{Binding NaviCommand}" CommandParameter="{x:Static enum:LebenslaufView.Hobbys}" Content="Hobbys" Margin="0,0,0,5"/>
         <RadioButton Style="{StaticResource NavButton}" Command="{Binding NaviCommand}" CommandParameter="{x:Static enum:LebenslaufView.Projekt}" Content="Projekt (Optional)" Margin="0,0,0,5"/>
+       
 
     </StackPanel>
 

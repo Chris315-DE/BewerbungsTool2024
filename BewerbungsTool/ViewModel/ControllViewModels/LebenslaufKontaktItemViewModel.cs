@@ -13,6 +13,21 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
     {
         private string _icon = null!;
         private string _content = null!;
+        private int _index;
+
+
+        public int Index
+        {
+            get => _index;
+            set
+            {
+                if (_index != value)
+                {
+                    _index = value;
+                    RaisPropertyChanged();
+                }
+            }
+        }
 
         public string Icon
         {
@@ -59,12 +74,13 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
 
         public DelegateCommand IsSelectedCommand { get; set; }
 
-        public LebenslaufKontaktItemViewModel(string icon, string content)
+        public LebenslaufKontaktItemViewModel(string icon, string content, int index)
         {
             Icon = icon;
             Content = content;
             IsSelected = false;
             dataStore = LebenslaufDataStore.Instance;
+            Index = index;
             IsSelectedCommand = new DelegateCommand(o => { dataStore.OnSelectedLebenslaufKontaktItemChanged(this); });
 
         }

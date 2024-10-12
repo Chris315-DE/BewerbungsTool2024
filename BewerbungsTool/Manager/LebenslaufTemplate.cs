@@ -20,8 +20,8 @@ namespace BewerbungsTool.Manager
         public LebenslaufPersonenInfoViewModel PersonenInfo;
         public ObservableCollection<LebenslaufProjektItemViewModel> Projekt;
         public ObservableCollection<LebenslaufStatsItemViewModel> Stats;
-
-
+        public ObservableCollection<LebenslaufHobbyItemViewModel> Hobbys;
+        public LebenslaufBiographieViewModel BiographieViewModel;
 
         public string Name;
 
@@ -34,6 +34,8 @@ namespace BewerbungsTool.Manager
             Projekt = LebenslaufProjektListViewModel.Instance.Items;
             Stats = LebenslaufStatListViewModel.Instance.LebenslaufStatList;
             PersonenInfo = LebenslaufPersonenInfoViewModel.Instance;
+            Hobbys = LebenslaufHobbyListViewModel.Instance.Hobbys;
+            BiographieViewModel = LebenslaufBiographieViewModel.Instance;
 
 
         }

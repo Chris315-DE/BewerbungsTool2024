@@ -39,7 +39,7 @@ namespace BewerbungsTool.Converters
             ObservableCollection<bool> list = (ObservableCollection<bool>)value;
             int index = int.Parse(parameter.ToString());
 
-            if (list?.Count == 5 && list?[index] == true)
+            if (list?.Count == 7 && list?[index] == true)
                 return Brushes.Green;
             return Brushes.Red;
 
@@ -61,7 +61,7 @@ namespace BewerbungsTool.Converters
 
             foreach (var item in bools)
             {
-                if (item) progress += 20;
+                if (item) progress += 15;
             }
             return progress;
 

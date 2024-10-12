@@ -1,4 +1,5 @@
-﻿using BewerbungsTool.Contracts;
+﻿using Accessibility;
+using BewerbungsTool.Contracts;
 using BewerbungsTool.DataStore;
 using BewerbungsTool.Enums;
 using BewerbungsTool.Manager;
@@ -23,7 +24,7 @@ namespace BewerbungsTool.ViewModel
 
         private LebenslaufViewModel()
         {
-            DoneList = new ObservableCollection<bool> { false, false, false, false, false };
+            DoneList = new ObservableCollection<bool> { false, false, false, false, false, false, false };
             Navigator = NavigationManager.Instance;
             Navigator.LebenslaufUnterViewModel = LebenslaufBerufserfahrungListViewModel.Instance;
             NaviCommand = new(o => navi(o));
@@ -40,24 +41,33 @@ namespace BewerbungsTool.ViewModel
                 }
             }
 
-            ÄnderungenSpeichernCommand = new DelegateCommand(o => 
+            ÄnderungenSpeichernCommand = new DelegateCommand(o =>
             {
+                LebenslaufTemplate templateToSafe;
+                if (SelectedTemplate is not null)
+                {
 
-                var templateToSafe = LebenslaufTemplate.Where(x => x.Name == SelectedTemplate).First();
+                    templateToSafe = LebenslaufTemplate?.Where(x => x?.Name == SelectedTemplate).First();
+                    templateToSafe.PersonenInfo = LebenslaufPersonenInfoViewModel.Instance;
+                    templateToSafe.Hobbys = LebenslaufHobbyListViewModel.Instance.Hobbys;
+                    templateToSafe.Berufserfahrung = LebenslaufBerufserfahrungListViewModel.Instance.Items;
+                    templateToSafe.Bildung = LebenslaufBildungsListViewModel.Instance.Items;
+                    templateToSafe.Projekt = LebenslaufProjektListViewModel.Instance.Items;
+                    templateToSafe.Stats = LebenslaufStatListViewModel.Instance.LebenslaufStatList;
+                    templateToSafe.BiographieViewModel = LebenslaufBiographieViewModel.Instance;
+                    SaveManager<LebenslaufTemplate> save = new SaveManager<LebenslaufTemplate>(templateToSafe);
+                    save.Save(SelectedTemplate);
+                }
 
-                templateToSafe.PersonenInfo = LebenslaufPersonenInfoViewModel.Instance;
 
-                SaveManager<LebenslaufTemplate> save = new SaveManager<LebenslaufTemplate> (templateToSafe);
 
-            
 
-                save.Save(SelectedTemplate);
 
 
                 _templateLoader.GeladeneTemplates.Clear();
                 _templateLoader.LadeTemplates();
                 LebenslaufTemplate.Clear();
-                if(_templateLoader.GeladeneTemplates.Count > 0)
+                if (_templateLoader.GeladeneTemplates.Count > 0)
                 {
                     foreach (var item in _templateLoader.GeladeneTemplates)
                     {
@@ -104,8 +114,10 @@ namespace BewerbungsTool.ViewModel
                     bool b2 = DoneList[2];
                     bool b3 = DoneList[3];
                     bool b4 = DoneList[4];
+                    bool b5 = DoneList[5];
+                    bool b6 = DoneList[6];
 
-                    DoneList = new ObservableCollection<bool> { b0, b1, b2, b3, b4 };
+                    DoneList = new ObservableCollection<bool> { b0, b1, b2, b3, b4, b5, b6 };
 
 
                     RaisPropertyChanged(nameof(DoneList));
@@ -118,8 +130,9 @@ namespace BewerbungsTool.ViewModel
                     b2 = DoneList[2];
                     b3 = DoneList[3];
                     b4 = DoneList[4];
-
-                    DoneList = new() { b0, b1, b2, b3, b4 };
+                    b5 = DoneList[5];
+                    b6 = DoneList[6];
+                    DoneList = new ObservableCollection<bool> { b0, b1, b2, b3, b4, b5, b6 };
                     RaisPropertyChanged(nameof(DoneList));
                     AddTemplateCommand?.RaiseCanExecuteChanged();
                     break;
@@ -129,8 +142,9 @@ namespace BewerbungsTool.ViewModel
                     b2 = state;
                     b3 = DoneList[3];
                     b4 = DoneList[4];
-
-                    DoneList = new() { b0, b1, b2, b3, b4 };
+                    b5 = DoneList[5];
+                    b6 = DoneList[6];
+                    DoneList = new() { b0, b1, b2, b3, b4, b5, b6 };
                     RaisPropertyChanged(nameof(DoneList));
                     AddTemplateCommand?.RaiseCanExecuteChanged();
                     break;
@@ -140,8 +154,9 @@ namespace BewerbungsTool.ViewModel
                     b2 = DoneList[2];
                     b3 = state;
                     b4 = DoneList[4];
-
-                    DoneList = new() { b0, b1, b2, b3, b4 };
+                    b5 = DoneList[5];
+                    b6 = DoneList[6];
+                    DoneList = new() { b0, b1, b2, b3, b4, b5, b6 };
                     RaisPropertyChanged(nameof(DoneList));
                     AddTemplateCommand?.RaiseCanExecuteChanged();
                     break;
@@ -151,13 +166,41 @@ namespace BewerbungsTool.ViewModel
                     b2 = DoneList[2];
                     b3 = DoneList[3];
                     b4 = state;
-
-                    DoneList = new() { b0, b1, b2, b3, b4 };
+                    b5 = DoneList[5];
+                    b6 = DoneList[6];
+                    DoneList = new() { b0, b1, b2, b3, b4, b5, b6 };
                     RaisPropertyChanged(nameof(DoneList));
                     AddTemplateCommand?.RaiseCanExecuteChanged();
                     break;
+                case LebenslaufHobbyListViewModel:
+                    b0 = DoneList[0];
+                    b1 = DoneList[1];
+                    b2 = DoneList[2];
+                    b3 = DoneList[3];
+                    b4 = DoneList[4];
+                    b5 = state;
+                    b6 = DoneList[6];
+                    DoneList = new() { b0, b1, b2, b3, b4, b5, b6 };
+                    RaisPropertyChanged(nameof(DoneList));
+                    AddTemplateCommand?.RaiseCanExecuteChanged();
+
+                    break;
+                case LebenslaufBiographieViewModel:
+
+                    b0 = DoneList[0];
+                    b1 = DoneList[1];
+                    b2 = DoneList[2];
+                    b3 = DoneList[3];
+                    b4 = DoneList[4];
+                    b5 = DoneList[5];
+                    b6 =state;
+                    DoneList = new() { b0, b1, b2, b3, b4, b5, b6 };
+                    RaisPropertyChanged(nameof(DoneList));
+                    AddTemplateCommand?.RaiseCanExecuteChanged();
 
 
+
+                    break;
 
             }
 
@@ -236,8 +279,8 @@ namespace BewerbungsTool.ViewModel
         {
 
 
-          
-           
+
+
 
             var template = LebenslaufTemplate.Where(o => o.Name == value).FirstOrDefault();
 
@@ -260,7 +303,7 @@ namespace BewerbungsTool.ViewModel
                 LebenslaufStatListViewModel.Instance.LebenslaufStatList = template.Stats;
                 _dataStore.OnLebenslaufUnterItemChanged(LebenslaufStatListViewModel.Instance, true);
             }
-            else 
+            else
             {
                 LebenslaufStatListViewModel.Instance.LebenslaufStatList = [];
                 _dataStore.OnLebenslaufUnterItemChanged(LebenslaufStatListViewModel.Instance, false);
@@ -276,7 +319,7 @@ namespace BewerbungsTool.ViewModel
                 _dataStore.OnLebenslaufUnterItemChanged(LebenslaufKontaktListViewModel.Instance, false);
             }
 
-            if(template.Berufserfahrung.Count() > 0)
+            if (template.Berufserfahrung.Count() > 0)
             {
                 LebenslaufBerufserfahrungListViewModel.Instance.Items = template.Berufserfahrung;
                 _dataStore.OnLebenslaufUnterItemChanged(LebenslaufBerufserfahrungListViewModel.Instance, true);
@@ -287,12 +330,21 @@ namespace BewerbungsTool.ViewModel
                 _dataStore.OnLebenslaufUnterItemChanged(LebenslaufBerufserfahrungListViewModel.Instance, false);
             }
 
-
-
-
-            if(template.Bildung?.Count() > 0)
+            if (template?.Hobbys?.Count() > 0)
             {
-                LebenslaufBildungsListViewModel.Instance.Items=template.Bildung;
+                LebenslaufHobbyListViewModel.Instance.Hobbys = template.Hobbys;
+                _dataStore.OnLebenslaufUnterItemChanged(LebenslaufHobbyListViewModel.Instance, true);
+            }
+            else
+            {
+                LebenslaufHobbyListViewModel.Instance.Hobbys = [];
+                _dataStore.OnLebenslaufUnterItemChanged(LebenslaufHobbyListViewModel.Instance, false);
+            }
+
+
+            if (template.Bildung?.Count() > 0)
+            {
+                LebenslaufBildungsListViewModel.Instance.Items = template.Bildung;
                 _dataStore.OnLebenslaufUnterItemChanged(LebenslaufBildungsListViewModel.Instance, true);
             }
             else
@@ -305,10 +357,20 @@ namespace BewerbungsTool.ViewModel
                 LebenslaufPersonenInfoViewModel.Instance.SetInstance(template.PersonenInfo);
                 _dataStore.OnLebenslaufUnterItemChanged(LebenslaufPersonenInfoViewModel.Instance, true);
             }
-            else 
+            else
             {
                 LebenslaufPersonenInfoViewModel.Instance.SetInstance(null);
-                _dataStore.OnLebenslaufUnterItemChanged(LebenslaufPersonenInfoViewModel.Instance,false);
+                _dataStore.OnLebenslaufUnterItemChanged(LebenslaufPersonenInfoViewModel.Instance, false);
+            }
+            if (string.IsNullOrEmpty(template?.BiographieViewModel?.Biography))
+            {
+                _dataStore.OnLebenslaufUnterItemChanged(LebenslaufBiographieViewModel.Instance,false);
+                LebenslaufBiographieViewModel.Instance.Biography = string.Empty;
+            }
+            else
+            {
+                _dataStore.OnLebenslaufUnterItemChanged(LebenslaufBiographieViewModel.Instance,true);
+                LebenslaufBiographieViewModel.Instance.Biography = template.BiographieViewModel.Biography;
             }
         }
 
@@ -339,6 +401,14 @@ namespace BewerbungsTool.ViewModel
                     case LebenslaufView.Projekt:
                         Navigator.LebenslaufUnterViewModel = LebenslaufProjektListViewModel.Instance;
                         break;
+                    case LebenslaufView.Hobbys:
+                        Navigator.LebenslaufUnterViewModel = LebenslaufHobbyListViewModel.Instance;
+                        break;
+                    case LebenslaufView.Biographie:
+                        Navigator.LebenslaufUnterViewModel = LebenslaufBiographieViewModel.Instance;
+                        break;
+
+
                     default:
                         Debugger.Break();
                         break;
