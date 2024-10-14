@@ -12,7 +12,7 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
 {
     public class LebenslaufBerufserfahrungListViewModel : BaseViewModel
     {
-        private const string ART = "Aufgabenbereiche";
+        private const string ART = "Aufgabenbereiche: ";
         private string _tätigkeit;
         private string _arbeitgeber;
         private string _vonBis;

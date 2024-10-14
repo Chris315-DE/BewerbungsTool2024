@@ -1,12 +1,15 @@
 ﻿using BewerbungsTool.Manager;
+using BewerbungsTool.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.DirectoryServices.ActiveDirectory;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace BewerbungsTool.LatexService
 {
@@ -34,6 +37,9 @@ namespace BewerbungsTool.LatexService
                     countfiles++;
             }
 
+
+            LTexMetaEnde();
+
             FilePath = Path.Combine(SavePath, $"CV{countfiles}.tex");
 
 
@@ -41,9 +47,7 @@ namespace BewerbungsTool.LatexService
         }
 
         //fürs Testen der RightColum 
-        private const string LATEX_TEST_END = @"\end{rightcolumn}
-											\end{paracol}
-											\end{document}";
+
 
         #region LeftCol
 
@@ -88,7 +92,7 @@ namespace BewerbungsTool.LatexService
 
 % we use utf8 since we want to build from any machine
 \usepackage[utf8]{inputenc}		
-\usepackage[USenglish]{isodate}
+\usepackage[ngerman]{isodate}
 \usepackage{fancyhdr}
 \usepackage[numbers]{natbib}
 
@@ -99,7 +103,7 @@ namespace BewerbungsTool.LatexService
 % provides \isempty test
 \usepackage{xstring, xifthen}
 \usepackage{enumitem}
-\usepackage[english]{babel}
+\usepackage[ngerman]{babel}
 \usepackage{blindtext}
 \usepackage{pdfpages}
 \usepackage{changepage}
@@ -549,10 +553,10 @@ namespace BewerbungsTool.LatexService
             string black = @"}{black}\\[6pt]" + "\n";
             foreach (var item in Lebenslauf.Kontakt)
             {
-             
+
                 string conv = convertUnicodeStringtoLTexFormat(item.Index, item.Content);
                 ret += conv;
-             
+
 
             }
 
@@ -626,7 +630,7 @@ namespace BewerbungsTool.LatexService
             => @"\cvskill{" + statname + @"} {" + value + "} {" + (float.Parse(score) / 10).ToString().Replace(',', '.') + @"} \\[-2pt]";
 
 
-   
+
 
         private string LTexMeta_Bildung()
         {
@@ -687,7 +691,7 @@ namespace BewerbungsTool.LatexService
 
         private string convertUnicodeStringtoLTexFormat(int index, string content)
         {
-          
+
             switch (index)
             {
                 //GitHub
@@ -704,11 +708,11 @@ namespace BewerbungsTool.LatexService
                     }
 
 
-                    return @"\iconhref{Github}{16}{" + splittet + @"}{" + content + @"}{black}\\[6pt]"+"\n";
+                    return @"\iconhref{Github}{16}{" + splittet + @"}{" + content + @"}{black}\\[6pt]" + "\n";
 
                 //Mail
                 case 1:
-                    return @"\iconemail{Envelope}{16}{" + content + @"}{" + content+ @"}{black}\\[6pt]" + "\n";
+                    return @"\iconemail{Envelope}{16}{" + content + @"}{" + content + @"}{black}\\[6pt]" + "\n";
 
                 //Phone
                 case 2:
@@ -717,23 +721,23 @@ namespace BewerbungsTool.LatexService
                 //Xing
                 case 3:
 
-                     splittet = content.Replace("https://www.xing.com/", "");
+                    splittet = content.Replace("https://www.xing.com/", "");
 
-                    return @"\iconhref{Xing}{16}{" + splittet +  @"}{" + content + @"}{black}\\[6pt]" + "\n";
+                    return @"\iconhref{Xing}{16}{" + splittet + @"}{" + content + @"}{black}\\[6pt]" + "\n";
 
                 //Linkedin
                 case 4:
                     splittet = content.Replace("https://www.linkedin.com/in/", "");
-                    return @"\iconhref{Linkedin}{16}{" + splittet + @"}{ "+ content +@"}{black}\\[6pt]" + "\n";
+                    return @"\iconhref{Linkedin}{16}{" + splittet + @"}{ " + content + @"}{black}\\[6pt]" + "\n";
 
                 //Homepage
                 case 5:
-                    splittet = content.Replace("https://www.", "").Replace(".com","");
-                    return @"\iconhref{Home}{16}{" + splittet + @"}{" + content +@"}{black}\\[6pt]" + "\n";
+                    splittet = content.Replace("https://www.", "").Replace(".com", "");
+                    return @"\iconhref{Home}{16}{" + splittet + @"}{" + content + @"}{black}\\[6pt]" + "\n";
 
                 //Map-Marker
                 case 6:
-                    return @"\icontext{MapMarker}{16}{" + content + @"}{black}\\[6pt]"+"\n";
+                    return @"\icontext{MapMarker}{16}{" + content + @"}{black}\\[6pt]" + "\n";
 
 
 
@@ -745,9 +749,111 @@ namespace BewerbungsTool.LatexService
             }
         }
         #endregion
+
+
+
+        #region RIGHTCOl
+
+
+        private const string LATEX_END = @"\end{rightcolumn}
+											\end{paracol}
+											\end{document}";
+
+        private string LTexMetaBio()
+        {
+            string ret =
+@"\cvsection{Biographie}
+\vspace{4pt}
+
+\cvtext{" + $"{Lebenslauf.BiographieViewModel.Biography}" + ".}\n\n";
+
+
+
+
+            return ret;
+        }
+
+        private const string LTEX_WORK_EXP_COMMENT = @"%---------------------------------------------------------------------------------------
+%	WORK EXPERIENCE
+%----------------------------------------------------------------------------------------
+
+\vspace{10pt}
+\cvsection{Berufserfahrung}
+\vspace{4pt}
+";
+
+
+        private string LTexMetaBeruf()
+        {
+            string ret = string.Empty;
+
+            foreach (var item in Lebenslauf.Berufserfahrung)
+            {
+
+                ret += @"\cvevent" + "\n";
+                ret += "{" + item.VonBis + "}\n";
+                ret += "{" + item.Beruf + "}\n";
+                ret += "{" + item.Arbeitgeber + "}\n";
+                ret += "{" + item.Art + item.Kurzbeschreibung + "}\n";
+                ret += @"\vfill\null" + "\n";
+                ret += @"\vfill\null" + "\n";
+            }
+
+            return ret;
+        }
+
+
+
+        private const string HOTFIX = @"% hofixes to create fake-space to ensure the whole height is used
+\newpage
+\mbox{}
+\vfill
+\mbox{}
+\vfill
+\mbox{}
+\vfill
+\mbox{}
+\vfill
+\mbox{}
+\vfill
+\mbox{}
+\vfill
+\mbox{}
+";
+
+
+        private string LTexMetaEnde()
+        {
+            string? city = BriefkopfViewModel.Instance.EigenePlzStadt?.Trim().Substring(6);
+            string? unterschrift = AnschreibenViewModel.Instance?.SelectedTemplate?.UnterschriftPfad?.Replace('\\', '/');
+            string ret = HOTFIX;
+
+            if (string.IsNullOrEmpty(city))
+            {
+                ret += @"\hrulefill, den \today     \hspace{1cm}   \hrulefill" + "\n" + @"\hspace*{65mm}\phantom{\hrulefill, den \today }";
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(unterschrift))
+                {
+                    ret += @"\hspace{2.5cm}\phantom{" + city + @", den \today }   \includegraphics {" + unterschrift + "}\n\n";
+
+                }
+                ret += city;
+
+                ret += @", den \today     \hspace{1cm}   \hrulefill" + "\n\n" + @"\hspace{2.5cm}\phantom{" + city + @", den \today }" + Lebenslauf.PersonenInfo.Name;
+
+            }
+
+
+            return ret;
+        }
+
+
+        #endregion
         private void WriteandSave()
         {
-            File.WriteAllText(FilePath, LATEX_SETUP + LTexMeta_Person() + LATEX_META_SKILLS_KOMMENTAR + "\n" + LTexMeta_Skills() + LATEX_META_BILDUNG_KOMMENTAR + "\n" + LTexMeta_Bildung() + LTexMeta_Projekte() + LTexMeta_Hobbys() + LTexMeta_Kontakt()+LATEX_END_LEFT_START_RIGHT + LATEX_TEST_END);
+            File.WriteAllText(FilePath, LATEX_SETUP + LTexMeta_Person() + LATEX_META_SKILLS_KOMMENTAR + "\n" + LTexMeta_Skills() + LATEX_META_BILDUNG_KOMMENTAR + "\n" + LTexMeta_Bildung() + LTexMeta_Projekte() + LTexMeta_Hobbys() + LTexMeta_Kontakt() + LATEX_END_LEFT_START_RIGHT + LTexMetaBio() + LTEX_WORK_EXP_COMMENT + LTexMetaBeruf() + LTexMetaEnde() + LATEX_END);
         }
 
 
