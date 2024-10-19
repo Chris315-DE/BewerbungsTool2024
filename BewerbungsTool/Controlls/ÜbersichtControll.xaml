@@ -23,8 +23,9 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Button Height="40" Width="100" Style="{StaticResource CkButton}" Content="TestCV" Command="{Binding TestCVCommand}" Background="{StaticResource GUIForgroundMidBrush}"/>
-
+        <Button  Height="40" Width="100" Style="{StaticResource CkButton}" Content="TestCV" Command="{Binding TestCVCommand}" Background="{StaticResource GUIForgroundMidBrush}"/>
+        <Button Grid.Row="1" Height="40" Width="100" Style="{StaticResource CkButton}" Content="TestAnschreiben" Command="{Binding TestAnschreibenCommand}" Background="{StaticResource GUIForgroundMidBrush}"/>
+        
 
     </Grid>
 

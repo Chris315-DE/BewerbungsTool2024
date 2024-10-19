@@ -1,5 +1,6 @@
 ﻿using BewerbungsTool.LatexService;
 using BewerbungsTool.Manager;
+using BewerbungsTool.Model;
 using BewerbungsTool.MvvmBasics;
 using BewerbungsTool.ViewModel.ControllViewModels;
 
@@ -28,11 +29,17 @@ namespace BewerbungsTool.ViewModel
 
             });
 
-
+            TestAnschreibenCommand = new(o => 
+            {
+                var cover = new CoverLetterCreator(AnschreibenViewModel.Instance.SelectedTemplate);
+                
+            });
           
 
         }
         private static ÜbersichtsViewModel _instance;
+
+        public DelegateCommand TestAnschreibenCommand { get; set; }
 
         public static ÜbersichtsViewModel Instance => (_instance ?? new ÜbersichtsViewModel());
 
