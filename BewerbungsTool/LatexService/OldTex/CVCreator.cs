@@ -38,7 +38,7 @@ namespace BewerbungsTool.LatexService
             }
 
 
-            LTexMetaEnde();
+            //LTexMetaEnde();
 
             FilePath = Path.Combine(SavePath, $"CV{countfiles}.tex");
 
@@ -50,7 +50,7 @@ namespace BewerbungsTool.LatexService
 
 
         #region LeftCol
-
+        #region Const
 
         //  \begin{leftcolumn}
         private const string LATEX_SETUP = @"%-----------------------------------------------------------------------------------------------------------------------------------------------%
@@ -531,13 +531,36 @@ namespace BewerbungsTool.LatexService
 \mbox{}
 ";
 
-
+        #endregion
         private string LTexMeta_Person()
         {
             string? name = Lebenslauf?.PersonenInfo?.Name;
             if (string.IsNullOrEmpty(name))
                 return default;
 
+            //string? name
+            //string? geburtsDaten
+            //string? beruf
+            //string? nationalität
+            //string? familienstand
+            /* 
+             *  string Ltex1 = @"\fcolorbox{white}{white}{\begin{minipage}[c][1.5cm][c]{1\mpwidth}
+							\LARGE{\textbf{\textcolor{maincol}{";
+
+
+            Ltex1 = Ltex1 += name += @"}}} \\[2pt]
+				\normalsize{ \textcolor{maincol} {";
+            Ltex1 = Ltex1 += beruf += @"} }
+									\end{minipage}} \\
+									\icontext{CaretRight}{12}{";
+            Ltex1 = Ltex1 += geburtsDaten += @"}{black}\\[6pt]
+												\icontext{CaretRight}{12}{";
+
+            Ltex1 = Ltex1 += nationalität += @"}{black}\\[6pt]
+											\icontext{CaretRight}{12}{";
+
+            Ltex1 = Ltex1 += familienstand += @"}{black}\\[6pt]";
+             */
 
             string? geburtsDaten = Lebenslauf?.PersonenInfo?.GeburtsDaten;
             if (string.IsNullOrEmpty(geburtsDaten))

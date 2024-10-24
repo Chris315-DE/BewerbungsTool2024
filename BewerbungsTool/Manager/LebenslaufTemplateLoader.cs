@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿#define UNIT
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -18,7 +19,13 @@ namespace BewerbungsTool.Manager
 
         private LebenslaufTemplateLoader()
         {
+
+#if UNIT
+            _Folder = Path.Combine("D:\\Software_Projekte\\BewerbungsTool\\BewerbungsTool\\bin\\Debug\\net8.0-windows", typeof(LebenslaufTemplate).Name);
+
+#else 
             _Folder = Path.Combine(AppContext.BaseDirectory, typeof(LebenslaufTemplate).Name);
+#endif
             GeladeneTemplates = [];
             LadeTemplates();
 

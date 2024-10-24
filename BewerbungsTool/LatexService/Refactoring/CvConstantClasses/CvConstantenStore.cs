@@ -44,22 +44,22 @@ namespace BewerbungsTool.LatexService
 ";
 
 
-        public static StringBuilder SkillsKommentar = new StringBuilder().Append(LATEX_META_SKILLS_KOMMENTAR);
+        public static StringBuilder SkillsKommentar = new StringBuilder().AppendLine(LATEX_META_SKILLS_KOMMENTAR);
 
-        public static StringBuilder BildungKommentar = new StringBuilder().Append(LATEX_META_BILDUNG_KOMMENTAR);
+        public static StringBuilder BildungKommentar = new StringBuilder().AppendLine(LATEX_META_BILDUNG_KOMMENTAR);
 
-        public static StringBuilder EndLeftStartRight = new StringBuilder().Append(LATEX_END_LEFT_START_RIGHT);
+        public static StringBuilder EndLeftStartRight = new StringBuilder().AppendLine(LATEX_END_LEFT_START_RIGHT);
 
         public static StringBuilder END = new StringBuilder().AppendLine(LATEX_END);
 
-        public static StringBuilder WorkExpKommentar = new StringBuilder().Append(LTEX_WORK_EXP_COMMENT);
+        public static StringBuilder WorkExpKommentar = new StringBuilder().AppendLine(LTEX_WORK_EXP_COMMENT);
 
         public static StringBuilder GetHotfixLines(int amount)
         {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < amount; i++)
             {
-                sb.Append(HOTFIX);
+                sb.AppendLine(HOTFIX);
             }
 
             return sb;

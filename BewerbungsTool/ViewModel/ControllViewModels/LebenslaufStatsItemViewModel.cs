@@ -97,5 +97,12 @@ namespace BewerbungsTool.ViewModel.ControllViewModels
 
         public DelegateCommand IsSelectedCommand { get; set; }
 
+
+
+        public override string ToString()
+        {
+            return $"{nameof(SliderValue)}: {SliderValue}, {nameof(Fähigkeit)}: {Fähigkeit}";
+        }
+
     }
 }
